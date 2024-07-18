@@ -87,7 +87,7 @@ nix profile install 'github:martinvonz/jj'
 
 #### Homebrew
 
-If you use linuxbrew, you can run:
+If you use Homebrew, you can run:
 
 ```shell
 # To install the latest release
