@@ -506,10 +506,10 @@ Parent commit (@-)      : kwtuwqnm 643061ac ABC
 
 That will bring up the built-in diff editor[^alternative_diff_editors] with a
 diff of the changes in the "ABCD" commit. Expand the file by clicking on `(+)`
-or with right arrow, then select the sections/line to include by clicking or
-using space. Once complete, press `c` to confirm changes, or `q` to exit without
-saving. You can also use the mouse to click on the menu items to see more
-options (keyboard navigation is currently limited).
+or with right arrow, then select the sections/line to include (the `- c` and `+ C`
+lines in this case) by clicking or using space. Once complete, press `c` to confirm
+changes, or `q` to exit without saving. You can also use the mouse to click on the menu
+items to see more options (keyboard navigation is currently limited).
 
 [^alternative_diff_editors]: There are many other diff editors you could use.
 For example, if you have [Meld](https://meldmerge.org) installed and in the
