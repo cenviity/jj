@@ -91,7 +91,7 @@ we don't forget what we're working on:
 
 ```shell
 # This brings up $EDITOR (or `nano` or `Notepad` by default).
-# Enter something like "Say goodbye" in the editor and then save the file and close
+# Enter something like "Say goodbye" in the editor, then save the file and close
 # the editor.
 $ jj describe
 Working copy  (@) now at: kntqzsqt e427edcf (empty) Say goodbye
@@ -139,8 +139,8 @@ As you may have noticed, the working-copy commit's ID changed both when we
 edited the description and when we edited the README. However, the parent commit
 stayed the same. Each change to the working-copy commit amends the previous
 version. So how do we tell Jujutsu that we are done amending the current change
-and want to start working on a new one? That is what `jj new` is for. That will
-create a new commit on top of your current working-copy commit. The new commit
+and want to start working on a new one? That is what `jj new` is for – it
+creates a new commit on top of your current working-copy commit. The new commit
 is for the working-copy changes.
 
 So, let's say we're now done with this change, so we create a new change:
@@ -159,7 +159,7 @@ If we later realize that we want to make further changes, we can make them in
 the working copy and then run `jj squash`. That command squashes (moves) the
 changes from a given commit into its parent commit. Like most commands, it acts
 on the working-copy commit by default. When run on the working-copy commit, it
-behaves very similar to `git commit --amend`.
+behaves very similarly to `git commit --amend`.
 
 Alternatively, we can use `jj edit <commit>` to resume editing a commit in the
 working copy. Any further changes in the working copy will then amend the
@@ -189,9 +189,9 @@ $ jj log
 ```
 
 The `@` indicates the [working-copy commit](glossary.md#working-copy-commit). The first
-ID on a line (e.g. "mpqrykyp" above) is the [change ID](glossary.md#change-id). The
+ID on a line (e.g. `mpqrykyp` above) is the [change ID](glossary.md#change-id). The
 second ID is the [commit ID](glossary.md#commit-id). You can give either ID to commands
-that take revisions as arguments. We will generally prefer change IDs because they stay
+that take revisions as arguments. Change IDs are generally preferred because they stay
 the same when the commit is rewritten.
 
 By default, `jj log` lists your local commits, with some remote commits added
@@ -199,7 +199,7 @@ for context. The `~` indicates that the commit has parents that are not included
 in the graph. We can use the `--revisions`/`-r` flag to select a different set
 of revisions to list. The flag accepts a "[revset](revsets.md)", which is an
 expression in a simple language for specifying revisions. For example, `@`
-refers to the working-copy commit, `root()` refers to the root commit,
+refers to the working-copy commit, `root()` refers to the root commit, and
 `bookmarks()` refers to all commits pointed to by bookmarks (similar to Git's
 branches). We can combine expressions with `|` for union, `&` for intersection
 and `~` for difference. For example:
@@ -216,8 +216,8 @@ $ jj log -r '@ | root() | bookmarks()'
 ```
 
 The `00000000` commit (change ID `zzzzzzzz`) is a virtual commit that's called the
-"[root commit](glossary.md#root-commit)". It's the root commit of every repo. The
-`root()` function in the revset matches it.
+"[root commit](glossary.md#root-commit)". It's at the root of every repo. The `root()`
+function in the revset matches it.
 
 There are also operators for getting the parents (`foo-`), children (`foo+`),
 ancestors (`::foo`), descendants (`foo::`), DAG range (`foo::bar`, like
@@ -383,8 +383,8 @@ Note that commit C automatically got rebased on top of the resolved B2, and that
 C is also resolved (since it modified only a different file).
 
 By the way, if we want to get rid of B1 now, we can run `jj abandon
-ovknlmro`. That will hide the commit from the log output and will rebase any
-descendants to its parent.
+ovknlmro`. That hides the commit from the log output and rebases its
+descendants (if any) to its parent.
 
 ## The operation log
 
@@ -409,7 +409,7 @@ $ jj op log
 [many more lines]
 ```
 
-The most useful command is `jj undo`, which will undo your last operation.
+The most useful command is `jj undo`, which undoes your last operation.
 
 ```shell
 $ jj undo
@@ -492,9 +492,9 @@ We "forgot" to capitalize "c" in the second commit when we capitalized the other
 letters. We then fixed that in the third commit when we also added "D". It would
 be cleaner to move the capitalization of "c" into the second commit. We can do
 that by running `jj squash` with the `--interactive`/`-i` option on the third
-commit. Remember that `jj squash` moves all the changes from one commit into its
-parent. `jj squash -i` moves only part of the changes into its parent. Now try
-that:
+commit. Remember that `jj squash` moves all the changes from one commit
+into its parent. `jj squash -i` moves only part of the changes from one commit into its
+parent. Now try it:
 
 ```shell
 $ jj squash -i
@@ -504,12 +504,12 @@ Working copy  (@) now at: mrxqplyk 52a6c7fd ABCD
 Parent commit (@-)      : kwtuwqnm 643061ac ABC
 ```
 
-That will bring up the built-in diff editor[^alternative_diff_editors] with a
+This brings up the built-in diff editor[^alternative_diff_editors] with a
 diff of the changes in the "ABCD" commit. Expand the file by clicking on `(+)`
-or with right arrow, then select the sections/line to include (the `- c` and `+ C`
-lines in this case) by clicking or using space. Once complete, press `c` to confirm
-changes, or `q` to exit without saving. You can also use the mouse to click on the menu
-items to see more options (keyboard navigation is currently limited).
+or with right arrow, then select the sections/lines to include (the `- c` and `+ C`
+lines in this case) by clicking or using the spacebar. Once complete, press `c` to
+confirm changes, or `q` to exit without saving. You can also use the mouse to click on
+the menu items to see more options (keyboard navigation is currently limited).
 
 [^alternative_diff_editors]: There are many other diff editors you could use.
 For example, if you have [Meld](https://meldmerge.org) installed and in the
@@ -543,7 +543,7 @@ conflicts.
 
 Let's try one final command for changing the contents of an existing commit. That
 command is `jj diffedit`, which lets you edit the changes in a commit without
-checking it out.
+checking it out into the working copy.
 
 ```shell
 $ jj diffedit -r @-
@@ -565,7 +565,7 @@ Then run `jj squash` to move the resolution into the conflicted commit.
 ```
 
 In the diff editor, use the arrow keys and spacebar to select all lines but the
-last. Press 'c' to save the changes and close it. You can now inspect the
+last. Press `c` to save the changes and close the editor. You can now inspect the
 rewritten commit with `jj diff -r @-` again, and you should see your deletion of
 the last line. Unlike `jj squash -i`, which left the content state of the commit
 unchanged, `jj diffedit` (typically) results in a different state, which means
