@@ -534,7 +534,7 @@ If we look at the diff of the second commit, we now see that all three lines got
 capitalized:
 
 ```shell
-$ jj diff -r @- --git
+$ jj diff -r @- --git  # Feel free to skip the `--git` flag
 diff --git a/file b/file
 index de980441c3..b1e67221af 100644
 --- a/file
