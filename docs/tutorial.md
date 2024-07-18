@@ -468,11 +468,18 @@ If we look at the diff of the second commit, we now see
 that all three lines got capitalized:
 
 ```shell
-$ jj diff -r @-
-Modified regular file file:
-   1    1: aA
-   2    2: bB
-   3    3: cC
+$ jj diff -r @- --git  # Feel free to skip the `--git` flag
+diff --git a/file b/file
+index de980441c3..b1e67221af 100644
+--- a/file
++++ b/file
+@@ -1,3 +1,3 @@
+-a
+-b
+-c
++A
++B
++C
 ```
 
 The child change ("ABCD" in our case) will have the same content *state* after
