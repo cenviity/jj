@@ -113,8 +113,7 @@ If we later realize that we want to make further changes, we can make them
 in the working copy and then run `jj squash`. That command squashes the changes
 from a given commit into its parent commit. Like most commands, it acts on the
 working-copy commit by default. When run on the working-copy commit, it behaves
-very similar to `git commit --amend`, and `jj amend` is in fact an alias for
-`jj squash`.
+very similar to `git commit --amend`.
 
 Alternatively, we can use `jj edit <commit>` to resume editing a commit in the
 working copy. Any further changes in the working copy will then amend the
