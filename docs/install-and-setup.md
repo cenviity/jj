@@ -14,7 +14,7 @@ If you use [`cargo-binstall`][cargo-binstall], you
 can install binaries of the latest `jj` release from GitHub as follows:
 
 ```shell
-# Will put the jj binary for the latest release in ~/.cargo/bin by default
+# To install the jj binary for the latest release (placed in ~/.cargo/bin by default)
 cargo binstall --strategies crate-meta-data jj-cli
 ```
 
@@ -80,7 +80,7 @@ You can also add this flake url to your system input flakes. Or you can
 install the flake to your user profile:
 
 ```shell
-# Installs the prerelease version from the main branch
+# To install the *prerelease* version from the main branch
 nix profile install 'github:jj-vcs/jj'
 ```
 
@@ -89,7 +89,7 @@ nix profile install 'github:jj-vcs/jj'
 If you use Homebrew, you can run:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 brew install jj
 ```
 
@@ -142,7 +142,7 @@ cargo install --locked --bin jj jj-cli
 If you use Homebrew, you can run:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 brew install jj
 ```
 
@@ -152,7 +152,7 @@ You can also install `jj` via [the MacPorts `jujutsu`
 port][macports]:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 sudo port install jujutsu
 ```
 
