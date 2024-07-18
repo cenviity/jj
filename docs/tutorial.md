@@ -59,10 +59,11 @@ The parent commit, for example, has the change ID `orrkosyo` and the commit ID
 > checkout of the repository.
 > The change ID however, is a new concept, unique to Jujutsu.
 
-We can also see from the output above that our working copy is an actual commit
-with a commit ID (`d7439b06` in the example). When you make a change in the
-working copy, the working-copy commit gets automatically amended by the next
-`jj` command.
+We can also see from the output above that our [working copy](glossary.md#working-copy)
+is an actual [commit](glossary.md#commit) with a [commit ID](glossary.md#commit-id)
+(`d7439b06` in the example). When you make a change in the working copy, the
+[working-copy commit](glossary.md#working-copy-commit) gets automatically amended by the
+next `jj` command.
 
 > **Git users:** This is a huge difference from Git where the working copy is a
 > separate concept and not yet a commit.
@@ -130,9 +131,9 @@ index 980a0d5f19..1ce3f81130 100644
 +Goodbye World!
 ```
 
-Jujutsu's diff format currently defaults to inline coloring of the diff (like
-`git diff --color-words`), so we used `--git` above to make the diff readable in
-this tutorial.
+Jujutsu's [diff format](config.md#diff-format) currently defaults to inline coloring of
+the diff (like `git diff --color-words`), so we used `--git` above to make the diff
+readable in this tutorial.
 
 As you may have noticed, the working-copy commit's ID changed both when we
 edited the description and when we edited the README. However, the parent commit
@@ -167,9 +168,9 @@ typically depends on how done you are with the change; if the change is almost
 done, it makes sense to use `jj new` so you can easily review your adjustments
 with `jj diff` before running `jj squash`.
 
-To view how a change has evolved over time, we can use `jj evolog` to see each
-recorded change for the current commit. This records changes to the working
-copy, message, squashes, rebases, etc.
+To view how a change has [evolved over time](glossary.md#rewrite), we can use `jj
+evolog` to see each recorded change for the current commit. This records changes to the
+working copy, message, squashes, rebases, etc.
 
 ## The log command and "revsets"
 
@@ -187,16 +188,16 @@ $ jj log
 ~
 ```
 
-The `@` indicates the working-copy commit. The first ID on a line
-(e.g. "mpqrykyp" above) is the change ID. The second ID is the commit ID. You
-can give either ID to commands that take revisions as arguments. We will
-generally prefer change IDs because they stay the same when the commit is
-rewritten.
+The `@` indicates the [working-copy commit](glossary.md#working-copy-commit). The first
+ID on a line (e.g. "mpqrykyp" above) is the [change ID](glossary.md#change-id). The
+second ID is the [commit ID](glossary.md#commit-id). You can give either ID to commands
+that take revisions as arguments. We will generally prefer change IDs because they stay
+the same when the commit is rewritten.
 
 By default, `jj log` lists your local commits, with some remote commits added
 for context. The `~` indicates that the commit has parents that are not included
 in the graph. We can use the `--revisions`/`-r` flag to select a different set
-of revisions to list. The flag accepts a ["revset"](revsets.md), which is an
+of revisions to list. The flag accepts a "[revset](revsets.md)", which is an
 expression in a simple language for specifying revisions. For example, `@`
 refers to the working-copy commit, `root()` refers to the root commit,
 `bookmarks()` refers to all commits pointed to by bookmarks (similar to Git's
@@ -214,9 +215,9 @@ $ jj log -r '@ | root() | bookmarks()'
 ◆  zzzzzzzz root() 00000000
 ```
 
-The `00000000` commit (change ID `zzzzzzzz`) is a virtual commit that's called
-the "root commit". It's the root commit of every repo. The `root()`
-function in the revset matches it.
+The `00000000` commit (change ID `zzzzzzzz`) is a virtual commit that's called the
+"[root commit](glossary.md#root-commit)". It's the root commit of every repo. The
+`root()` function in the revset matches it.
 
 There are also operators for getting the parents (`foo-`), children (`foo+`),
 ancestors (`::foo`), descendants (`foo::`), DAG range (`foo::bar`, like
@@ -229,9 +230,9 @@ ancestors (`::foo`), descendants (`foo::`), DAG range (`foo::bar`, like
 
 ## Conflicts
 
-Now let's see how Jujutsu deals with merge conflicts. We'll start by making some
-commits. We use `jj new` with the `--message`/`-m` option to set change
-descriptions (commit messages) right away.
+Now let's see how Jujutsu deals with merge [conflicts](glossary.md#conflict). We'll
+start by making some commits. We use `jj new` with the `--message`/`-m` option to set
+change descriptions (commit messages) right away.
 
 ```shell
 # Start creating a chain of commits off of the `master` bookmark
@@ -387,9 +388,9 @@ descendants to its parent.
 
 ## The operation log
 
-Jujutsu keeps a record of all changes you've made to the repo in what's called
-the "operation log". Use the `jj op` (short for `jj operation`) family of
-commands to interact with it. To list the operations, use `jj op log`:
+Jujutsu keeps a record of all changes you've made to the repo in what's called the
+"[operation log](glossary.md#operation-log)". Use the `jj op` (short for `jj operation`)
+family of commands to interact with it. To list the operations, use `jj op log`:
 
 ```shell
 $ jj op log
