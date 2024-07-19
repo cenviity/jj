@@ -1,6 +1,6 @@
 # Configuration
 
-These are the config settings available to jj/Jujutsu.
+These are the config settings available to `jj`/Jujutsu.
 
 ## Config files and TOML
 
@@ -1056,7 +1056,7 @@ same as the contents of `$right`.
 
 ### `JJ-INSTRUCTIONS`
 
-When editing a diff, jj will include a synthetic file called `JJ-INSTRUCTIONS`
+When editing a diff, `jj` will include a synthetic file called `JJ-INSTRUCTIONS`
 in the diff with instructions on how to edit the diff. Any changes you make to
 this file will be ignored. To suppress the creation of this file, set
 `ui.diff-instructions = false`.
@@ -1511,7 +1511,7 @@ for more information.
 
 By default, if a single remote exists it is used for `jj git fetch` and `jj git
 push`; however if multiple remotes exist, the default remote is assumed to be
-named `"origin"`, just like in Git. Sometimes this is undesirable, e.g. when you
+named "origin", just like in Git. Sometimes this is undesirable, e.g. when you
 want to fetch from a different remote than you push to, such as a GitHub fork.
 
 To change this behavior, you can modify the [repository
@@ -1732,7 +1732,7 @@ To configure the Watchman filesystem monitor, set
 `fsmonitor.backend = "watchman"`. Ensure that you have [installed the Watchman
 executable on your system](https://facebook.github.io/watchman/docs/install).
 
-You can configure `jj` to use watchman triggers to automatically create
+You can configure `jj` to use Watchman triggers to automatically create
 snapshots on filesystem changes by setting
 `fsmonitor.watchman.register-snapshot-trigger = true`.
 
