@@ -528,7 +528,7 @@ Windows, you'll need to understand and adapt the shell script):
 1. Check out `jj` (`jj git clone`), cloned from your fork of `jj` (e.g.
   `github.com/jjfan/jj`). You can also use a pure Git repo if you prefer.
 
-2. Make sure `github.com/jjfan/jj` includes the `gh-pages` bookmark of the jj repo
+2. Make sure `github.com/jjfan/jj` includes the `gh-pages` bookmark of the `jj` repo
 and run `git fetch origin gh-pages`.
 
 3. Go to the GitHub repository settings, enable GitHub Pages, and configure them
@@ -594,7 +594,7 @@ to adjust the `site_url` to something like `https://jjfan.github.io/jj`.
 
 ## Modifying protobuffers (this is not common)
 
-Occasionally, you may need to change the `.proto` files that define jj's data
+Occasionally, you may need to change the `.proto` files that define `jj`'s data
 storage format. In this case, you will need to add a few steps to the above
 workflow.
 
