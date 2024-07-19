@@ -34,7 +34,7 @@ test and document.
 
 The commit message should describe the changes in the commit;
 the PR description can even be empty, but feel free to include a personal
-message. We start the commit message with `<topic>: `  and don't use
+message. We start the commit message with `<topic>:`  and don't use
 [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). This means if
 you modified a command in the CLI, use its name as the topic, e.g.
 `next/prev: <your-modification>` or `conflicts: <your-modification>`. We don't
@@ -390,7 +390,7 @@ Windows, you'll need to understand and adapt the shell script):
 cloned from your fork of `jj` (e.g. `github.com/jjfan/jj`). You can also use a
 pure Git repo if you prefer.
 
-2. Make sure `github.com/jjfan/jj` includes the `gh-pages` bookmark of the jj repo
+2. Make sure `github.com/jjfan/jj` includes the `gh-pages` bookmark of the `jj` repo
 and run `git fetch origin gh-pages`.
 
 3. Go to the GitHub repository settings, enable GitHub Pages, and configure them
@@ -456,7 +456,7 @@ want to adjust the `site_url` to something like `https://jjfan.github.io/jj`.
 
 ## Modifying protobuffers (this is not common)
 
-Occasionally, you may need to change the `.proto` files that define jj's data
+Occasionally, you may need to change the `.proto` files that define `jj`'s data
 storage format. In this case, you will need to add a few steps to the above
 workflow.
 

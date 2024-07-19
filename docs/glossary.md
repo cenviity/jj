@@ -137,7 +137,7 @@ The operation log is the
 [operation](#operation) objects, much in the same way that commits form a DAG,
 which is sometimes called the "commit history". When operations happen in
 sequence, they form a single line in the graph. Operations that happen
-concurrently from jj's perspective result in forks and merges in the DAG.
+concurrently from `jj`'s perspective result in forks and merges in the DAG.
 
 ## Repository
 
@@ -150,7 +150,7 @@ TODO
 
 ## Revision
 
-A synonym for [Commit](#commit).
+A synonym for [commit](#commit).
 
 ## Revset
 

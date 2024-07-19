@@ -475,7 +475,7 @@ To inspect how output fragments are labeled, use `--color=debug` option.
 
 The default templates and aliases() are defined in the `[templates]` and
 `[template-aliases]` sections of the config respectively. The exact definitions
-can be seen in the [`cli/src/config/templates.toml`][1] file in jj's source
+can be seen in the [`cli/src/config/templates.toml`][1] file in `jj`'s source
 tree.
 
 [1]: https://github.com/jj-vcs/jj/blob/main/cli/src/config/templates.toml
