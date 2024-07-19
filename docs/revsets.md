@@ -622,7 +622,7 @@ Show commits not on any remote bookmark:
 jj log -r 'remote_bookmarks()..'
 ```
 
-Show commits not on `origin` (if you have other remotes like `fork`):
+Show commits not on "origin" (if you have other remotes like "fork"):
 
 ```shell
 jj log -r 'remote_bookmarks(remote=origin)..'

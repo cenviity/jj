@@ -159,7 +159,7 @@ Colocation can be disabled because it does have some disadvantages:
   as Git represents them, unfinished `git rebase` states, as well as other less
   common states a Git repository can be in.
 
-* Colocated workspaces are less resilient to
+* Co-located workspaces are less resilient to
   [concurrency](technical/concurrency.md#syncing-with-rsync-nfs-dropbox-etc)
   issues if you share the repo using an NFS filesystem or Dropbox. In general,
   such use of Jujutsu is not currently thoroughly tested.
