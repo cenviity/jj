@@ -159,8 +159,7 @@ $ # force push
 $ jj git push --branch your-feature
 ```
 
-The hyphen after `your-feature` comes from the
-[revset](https://github.com/martinvonz/jj/blob/main/docs/revsets.md) syntax.
+The hyphen after `your-feature` comes from the [revset](revsets.md#operators) syntax.
 
 ## Working with other people's branches
 
