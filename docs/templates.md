@@ -279,7 +279,7 @@ This type cannot be printed. The following methods are defined.
 
 The default templates and aliases() are defined in the `[templates]` and
 `[template-aliases]` sections of the config respectively. The exact definitions
-can be seen in the `cli/src/config/templates.toml` file in jj's source tree.
+can be seen in the `cli/src/config/templates.toml` file in `jj`'s source tree.
 
 <!--- TODO: Find a way to embed the default config files in the docs -->
 

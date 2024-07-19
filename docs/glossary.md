@@ -14,7 +14,7 @@ A backend is an implementation of the storage layer. There are currently two
 builtin commit backends: the Git backend and the native backend. The Git backend
 stores commits in a Git repository. The native backend is used for testing
 purposes only. Alternative backends could be used, for example, if somebody
-wanted to use jj with a humongous monorepo (as Google does).
+wanted to use `jj` with a humongous monorepo (as Google does).
 
 There are also pluggable backends for storing other information than commits,
 such as the "operation store backend" for storing
@@ -127,7 +127,7 @@ The operation log is the
 [operation](#operation) objects, much in the same way that commits form a DAG,
 which is sometimes called the "commit history". When operations happen in
 sequence, they form a single line in the graph. Operations that happen
-concurrently from jj's perspective result in forks and merges in the DAG.
+concurrently from `jj`'s perspective result in forks and merges in the DAG.
 
 ## Repository
 
@@ -140,7 +140,7 @@ TODO
 
 ## Revision
 
-A synonym for [Commit](#commit).
+A synonym for [commit](#commit).
 
 ## Revset
 

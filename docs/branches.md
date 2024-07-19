@@ -81,15 +81,15 @@ on the remote.
 Example:
 
 ```sh
-$ # List all available branches, as we want our colleague's branch.
+# List all available branches, as we want our colleague's branch.
 $ jj branch list --all
-$ # Find the branch.
-$ # [...]
-$ # Actually track the branch.
+# Find the branch.
+# [...]
+# Actually track the branch.
 $ jj branch track <branch name>@<remote name> # Example: jj branch track my-feature@origin
-$ # From this point on, <branch name> will be imported when fetching from <remote name>.
+# From this point on, <branch name> will be imported when fetching from <remote name>.
 $ jj git fetch --remote <remote name>
-$ # A local branch <branch name> should have been created or updated while fetching.
+# A local branch <branch name> should have been created or updated while fetching.
 $ jj new <branch name> # Do some local testing, etc.
 ```
 
@@ -102,15 +102,15 @@ the position of the remote branch.
 Example: 
 
 ```sh
-$ # List all local and remote branches.
+# List all local and remote branches.
 $ jj branch list --all
-$ # Find the branch we no longer want to track.
-$ # [...]
-# # Actually untrack it.
+# Find the branch we no longer want to track.
+# [...]
+# Actually untrack it.
 $ jj branch untrack <branch name>@<remote name> # Example: jj branch untrack stuff@origin
-$ # From this point on, this remote branch won't be imported anymore.
-$ # The local branch (e.g. stuff) is unaffected. It may or may not still
-$ # be tracking branches on other remotes (e.g. stuff@upstream).
+# From this point on, this remote branch won't be imported anymore.
+# The local branch (e.g. stuff) is unaffected. It may or may not still
+# be tracking branches on other remotes (e.g. stuff@upstream).
 ```
 
 ### Listing tracked branches
