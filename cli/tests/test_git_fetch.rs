@@ -1167,7 +1167,7 @@ fn test_git_fetch_some_of_many_bookmarks(subprocess: bool) {
     ------- stderr -------
     bookmark: a1@origin [updated] tracked
     bookmark: b@origin  [updated] tracked
-    Abandoned 1 commits that are no longer reachable.
+     Abandoned 1 commit that is no longer reachable.
     [EOF]
     ");
     }
@@ -1214,7 +1214,7 @@ fn test_git_fetch_some_of_many_bookmarks(subprocess: bool) {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     bookmark: a2@origin [updated] tracked
-    Abandoned 1 commits that are no longer reachable.
+     Abandoned 1 commit that is no longer reachable.
     [EOF]
     ");
     }
@@ -1879,7 +1879,7 @@ fn test_git_fetch_removed_bookmark(subprocess: bool) {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     bookmark: a2@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     [EOF]
     ");
     }
@@ -1985,7 +1985,7 @@ fn test_git_fetch_removed_parent_bookmark(subprocess: bool) {
     ------- stderr -------
     bookmark: a1@origin     [deleted] untracked
     bookmark: trunk1@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     Warning: No branch matching `master` found on any specified/configured remote
     [EOF]
     ");

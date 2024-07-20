@@ -5,8 +5,9 @@
 
 ### Download pre-built binaries for a release
 
-There are [pre-built binaries] of the last released version of `jj` for
-Windows, Mac, or Linux (the "musl" version should work on all distributions).
+There are [pre-built binaries](https://github.com/jj-vcs/jj/releases/latest)
+of the latest release of `jj` for Windows, Mac and Linux (the "musl"
+version should work on all distributions).
 
 #### Cargo Binstall
 
@@ -14,7 +15,7 @@ If you use [`cargo-binstall`][cargo-binstall], you
 can install binaries of the latest `jj` release from GitHub as follows:
 
 ```shell
-# Will put the jj binary for the latest release in ~/.cargo/bin by default
+# To install the jj binary for the latest release (placed in ~/.cargo/bin by default)
 cargo binstall --strategies crate-meta-data jj-cli
 ```
 
@@ -28,7 +29,7 @@ be compiled from the same source code.
 
 ### Linux
 
-#### From Source
+#### From source
 
 First make sure that you have a Rust version >= 1.84 and that the `libssl-dev`,
 `openssl`, `pkg-config`, and `build-essential` packages are installed by running
@@ -77,11 +78,11 @@ For example, if you want to run `jj` loaded from the flake, use:
 nix run 'github:jj-vcs/jj'
 ```
 
-You can also add this flake url to your system input flakes. Or you can
+You can also add this flake URL to your system input flakes. Or you can
 install the flake to your user profile:
 
 ```shell
-# Installs the prerelease version from the main branch
+# To install the *prerelease* version from the main branch
 nix profile install 'github:jj-vcs/jj'
 ```
 
@@ -90,14 +91,15 @@ nix profile install 'github:jj-vcs/jj'
 If you use Homebrew, you can run:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 brew install jj
 ```
 
 #### Gentoo Linux
 
-`dev-vcs/jj` is available in the [GURU](https://wiki.gentoo.org/wiki/Project:GURU) repository.
-Details on how to enable the GURU repository can be found [here](https://wiki.gentoo.org/wiki/Project:GURU/Information_for_End_Users).
+`dev-vcs/jj` is available in the [GURU](https://wiki.gentoo.org/wiki/Project:GURU)
+repository. Details on how to enable the GURU repository can be found
+[here](https://wiki.gentoo.org/wiki/Project:GURU/Information_for_End_Users).
 
 Once you have synced the GURU repository, you can install `dev-vcs/jj` via Portage:
 
@@ -107,7 +109,7 @@ emerge -av dev-vcs/jj
 
 ### Mac
 
-#### From Source, Vendored OpenSSL
+#### From source (with vendored OpenSSL)
 
 First make sure that you have a Rust version >= 1.84. You may also need to run:
 
@@ -130,7 +132,7 @@ or:
 cargo install --features vendored-openssl --locked --bin jj jj-cli
 ```
 
-#### From Source, Homebrew OpenSSL
+#### From source (with Homebrew OpenSSL)
 
 First make sure that you have a Rust version >= 1.84. You will also need
 [Homebrew] installed. You may then need to run some or all of
@@ -163,7 +165,7 @@ cargo install --locked --bin jj jj-cli
 If you use Homebrew, you can run:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 brew install jj
 ```
 
@@ -173,7 +175,7 @@ You can also install `jj` via [the MacPorts `jujutsu`
 port][macports]:
 
 ```shell
-# Installs the latest release
+# To install the latest release
 sudo port install jujutsu
 ```
 
@@ -199,14 +201,14 @@ cargo install --locked --bin jj jj-cli --features vendored-openssl
 You may want to configure your name and email so commits are made in your name.
 
 ```shell
-$ jj config set --user user.name "Martin von Zweigbergk"
-$ jj config set --user user.email "martinvonz@google.com"
+jj config set --user user.name "Martin von Zweigbergk"
+jj config set --user user.email "martinvonz@google.com"
 ```
 
 ## Command-line completion
 
 To set up command-line completion, source the output of
-`jj util completion bash/zsh/fish`. Exactly how to source it
+`jj util completion bash`/`zsh`/`fish`. Exactly how to source it
 depends on your shell.
 
 Improved completions are also available. They will complete things like
