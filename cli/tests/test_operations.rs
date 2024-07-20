@@ -1409,7 +1409,7 @@ fn test_op_diff() {
     bookmark: bookmark-1@origin [updated] tracked
     bookmark: bookmark-2@origin [updated] untracked
     bookmark: bookmark-3@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+     Abandoned 1 commit that is no longer reachable.
     [EOF]
     ");
     let output = test_env.run_jj_in(&repo_path, ["op", "diff"]);
@@ -2153,7 +2153,7 @@ fn test_op_show() {
     bookmark: bookmark-1@origin [updated] tracked
     bookmark: bookmark-2@origin [updated] untracked
     bookmark: bookmark-3@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+     Abandoned 1 commit that is no longer reachable.
     [EOF]
     ");
     let output = test_env.run_jj_in(&repo_path, ["op", "show"]);
