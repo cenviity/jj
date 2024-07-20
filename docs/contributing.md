@@ -295,7 +295,7 @@ Windows, you'll need to understand and adapt the shell script):
 cloned from your fork of `jj` (e.g. `jjfan.github.com/jj`). You can also use a
 pure Git repo if you prefer.
 
-2. Make sure `jjfan.github.com/jj` includes the `gh-pages` bookmark of the jj repo
+2. Make sure `jjfan.github.com/jj` includes the `gh-pages` bookmark of the `jj` repo
 and run `git fetch origin gh-pages`.
 
 3. Go to the GitHub repository settings, enable GitHub Pages, and configure them
@@ -326,8 +326,8 @@ back and forth, you can also rebuild the docs for the latest release as follows.
         v1.33.1 latest --push
     ```
 
-7. (Optional) When you are done, you may want to reset the `gh-bookmarks` to the
-same spot as it is in the upstream. If you configured the `upstream` remote,
+7. (Optional) When you are done, you may want to reset the `gh-pages` bookmark to the
+same spot as it is upstream. If you configured the "upstream" remote,
 this can be done with:
 
     ```shell
@@ -360,7 +360,7 @@ you can submit a PR based on the `gh-pages` bookmark of
 
 ## Modifying protobuffers (this is not common)
 
- Occasionally, you may need to change the `.proto` files that define jj's data
+ Occasionally, you may need to change the `.proto` files that define `jj`'s data
  storage format. In this case, you will need to add a few steps to the above
  workflow.
 
