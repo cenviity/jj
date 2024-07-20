@@ -75,7 +75,7 @@ since Jujutsu can't figure out how to combine these changes. Therefore, Jujutsu
 will materialize the conflict in the working copy using conflict markers, which
 would look like this:
 
-```
+```diff
 <<<<<<< Conflict 1 of 1
 %%%%%%% Changes from base to side #1
  apple
@@ -96,7 +96,7 @@ Therefore, to resolve this conflict, you would apply the diff (changing "grape"
 to "grapefruit") to the snapshot (the side with every line in uppercase),
 editing the file to look like this:
 
-```
+```plain
 APPLE
 GRAPEFRUIT
 ORANGE
@@ -120,7 +120,7 @@ If you prefer to just see the contents of each side of the conflict without the
 diff, Jujutsu also supports a "snapshot" style, which can be enabled by setting
 the `ui.conflict-marker-style` config option to "snapshot":
 
-```
+```diff
 <<<<<<< Conflict 1 of 1
 +++++++ Contents of side #1
 apple
@@ -142,7 +142,7 @@ Some tools expect Git-style conflict markers, so Jujutsu also supports [Git's
 conflict markers by setting the `ui.conflict-marker-style` config option to
 "git":
 
-```
+```diff
 <<<<<<< Side #1 (Conflict 1 of 1)
 apple
 grapefruit

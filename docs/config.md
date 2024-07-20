@@ -535,7 +535,7 @@ bindings and some more details.
 If you are using a standard Linux distro, your system likely already has
 `$PAGER` set and that will be preferred over the built-in. To use the built-in:
 
-```
+```shell
 jj config set --user ui.pager :builtin
 ```
 
@@ -756,7 +756,7 @@ one of them, or if you run multiple instances of `diffedit3` at the same time.
 
 Another way is to add a snippet to `~/.ssh/config`:
 
-```
+```ssh-config
 Host myhost
     User     myself
     Hostname myhost.example.com
