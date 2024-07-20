@@ -242,7 +242,7 @@ project. In this case, you might want to `jj git fetch` from "upstream" and to
 `jj git push` to "origin".
 
 You can configure the default remotes to fetch from and push to in your
-configuration file (for example `.jj/repo/config.toml`):
+[configuration file](config.md#config-files-and-toml):
 
 ```toml
 [git]
