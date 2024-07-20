@@ -182,18 +182,23 @@ recommended steps.
 
 One-time setup:
 
-    rustup toolchain add nightly  # wanted for 'rustfmt'
-    rustup toolchain add 1.89     # also specified in Cargo.toml
-    cargo install --locked bacon
-    cargo install --locked cargo-insta
-    cargo install --locked cargo-nextest
+```shell
+rustup toolchain install nightly  # (1)!
+rustup toolchain install 1.89     # (2)!
+cargo install --locked bacon cargo-insta cargo-nextest
+```
+
+1. Wanted for `rustfmt`.
+2. Also specified in `Cargo.toml`.
 
 During development (adapt according to your preference):
 
-    bacon clippy-all
-    cargo +nightly fmt # Occasionally
-    cargo nextest run --workspace # Occasionally
-    cargo insta test --workspace --test-runner nextest # Occasionally
+```shell
+bacon clippy-all
+cargo +nightly fmt # Occasionally
+cargo nextest run --workspace # Occasionally
+cargo insta test --workspace --test-runner nextest # Occasionally
+```
 
 !!! warning
 
