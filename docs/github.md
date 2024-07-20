@@ -233,21 +233,6 @@ $ jj log -r '::@ & ~remote_branches()'
 For a detailed overview, how Jujutsu handles conflicts, revisit
 the [tutorial][tut].
 
-[^1]:
-    This is a GitHub-style review, as GitHub currently only is able to compare
-    branches.
-
-[^2]:
-    If you're wondering why we prefer clean commits in this project, see
-    e.g. [this blog post][stacked]
-
-[auto-branch]: config.md#automatic-local-branch-creation
-[detached]: https://git-scm.com/docs/git-checkout#_detached_head
-[gh]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
-[http-auth]: https://github.com/martinvonz/jj/issues/469
-[tut]: tutorial.md#conflicts
-[stacked]: https://jg.gg/2018/09/29/stacked-diffs-versus-pull-requests/
-
 ## Using several remotes
 
 It is common to use several remotes when contributing to a shared repository.
@@ -266,3 +251,18 @@ push = "origin"
 ```
 
 The default for both `git.fetch` and `git.push` is "origin".
+
+[^1]:
+    This is a GitHub-style review, as GitHub currently only is able to compare
+    branches.
+
+[^2]:
+    If you're wondering why we prefer clean commits in this project, see
+    e.g. [this blog post][stacked].
+
+[auto-branch]: config.md#automatic-local-branch-creation
+[detached]: https://git-scm.com/docs/git-checkout#_detached_head
+[gh]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+[http-auth]: https://github.com/martinvonz/jj/issues/469
+[tut]: tutorial.md#conflicts
+[stacked]: https://jg.gg/2018/09/29/stacked-diffs-versus-pull-requests/
