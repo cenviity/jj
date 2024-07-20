@@ -57,7 +57,7 @@ part of diff output (e.g. `jj show` on a commit that introduces or resolves a
 conflict). Here's an example of how Git can render a conflict using [its "diff3"
 style](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented):
 
-```
+```diff
   <<<<<<< left
   apple
   grapefruit
@@ -84,7 +84,7 @@ Jujutsu helps you by combining the base and one side into a unified diff for
 you, making it easier to spot the differences to apply to the other side. Here's
 how that would look for the same example as above:
 
-```
+```diff
   <<<<<<<
   %%%%%%%
    apple
