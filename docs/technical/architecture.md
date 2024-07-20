@@ -3,8 +3,7 @@
 ## Data model
 
 The commit data model is similar
-to [Git's object model](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
-, but with some differences.
+to [Git's object model](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects), but with some differences.
 
 ## Separation of library from UI
 
@@ -14,11 +13,11 @@ crate, but it is meant to also be usable from a GUI or TUI, or in a server
 serving requests from multiple users. As a result, the library should avoid
 interacting directly with the user via the terminal or by other means; all
 input/output is handled by the CLI crate [^1]. Since the library crate is meant
-to usable in a server, it also cannot read configuration from the user's home
+to be usable in a server, it also cannot read configuration from the user's home
 directory, or from user-specific environment variables.
 
 [^1]: There are a few exceptions, such as for messages printed during automatic
-upgrades of the repo format
+upgrades of the repo format.
 
 A lot of thought has gone into making the library crate's API easy to use, but
 not much has gone into "details" such as which collection types are used, or
