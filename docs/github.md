@@ -222,7 +222,7 @@ Log all remote branches that you authored or committed to:
 $ jj log -r 'remote_branches() & (mine() | committer(your@email.com))'
 ```
 
-Log all descendants of the current working copy that aren't on any remote:
+Log all ancestors of the current working copy that aren't on any remote:
 
 ```shell
 $ jj log -r '::@ & ~remote_branches()'
