@@ -1,6 +1,6 @@
 # Frequently asked questions
 
-### Why does my bookmark not move to the new commit after `jj new/commit`?
+### Why does my bookmark not move to the new commit after `jj new`/`commit`?
 
 If you're familiar with Git, you might expect the current bookmark to move forward
 when you commit. However, Jujutsu does not have a concept of a "current bookmark".
@@ -14,28 +14,29 @@ options:
 
 * Using `jj git push --change` will automatically create a bookmark and push it.
 * Using `jj bookmark` commands to create or move a bookmark to either the commit
-  you want to push or a descendant on it. Unlike Git, Jujutsu doesn't do this
+  you want to push or one of its descendants. Unlike Git, Jujutsu doesn't do this
   automatically (see previous question).
 
-### Where is my commit, why is it not visible in `jj log`?
+### Where is my commit? Why is it not visible in `jj log`?
 
 Is your commit visible with `jj log -r 'all()'`?
 
 If yes, you should be aware that `jj log` only shows the revisions matching
-`revsets.log` by default. You can change it as described in [config] to show
-more revisions.
+`revsets.log` by default. You can change [this configuration][config-default-revisions]
+to show more revisions.
 
 If not, the revision may have been abandoned (e.g. because you
 used `jj abandon`, or because it's an obsolete version that's been rewritten
-with `jj rebase`, `jj describe`, etc). In that case, `jj log -r commit_id`
-should show the revision as "hidden". `jj new commit_id` should make the
+with `jj rebase`, `jj describe`, etc.). In that case, `jj log -r <commit_id>`
+should show the revision as "hidden". `jj new <commit_id>` should make the
 revision visible again.
 
 See [revsets] and [templates] for further guidance.
 
 ### How can I get `jj log` to show me what `git log` would show me?
 
-Use `jj log -r ..`. The `..` [operator] lists all visible commits in the repo, excluding the root (which is never interesting and is shared by all repos).
+Use `jj log -r ..`. The `..` [operator] lists all visible commits in the repo, excluding
+the root (which is never interesting and is shared by all repos).
 
 ### Can I monitor how `jj log` evolves?
 
@@ -91,27 +92,27 @@ you find a specific reason not to co-locate.
 
 ### `jj` is said to record the working copy after `jj log` and every other command. Where can I see these automatic "saves"?
 
-Indeed, every `jj` command updates the current "working-copy" revision, marked
+Indeed, every `jj` command updates the current working-copy revision, marked
 with `@` in `jj log`. You can notice this by how the [commit ID] of the
-working copy revision changes when it's updated. Note that, unless you move to
+working-copy revision changes when it's updated. Note that, unless you move to
 another revision (with `jj new` or `jj edit`, for example), the [change ID] will
 not change.
 
-If you expected to see a historical view of your working copy changes in the
+If you expected to see a historical view of your working-copy changes in the
 parent-child relationships between commits you can see in `jj log`, this is
 simply not what they mean. What you can see in `jj log` is that after the
-working copy commit gets amended (after any edit), the commit ID changes.
+working-copy commit gets amended (after any edit), the commit ID changes.
 
-You can see the actual history of working copy changes using `jj evolog`. This
-will show the history of the commits that were previously the "working-copy
-commit", since the last time the change id of the working copy commit changed.
-The obsolete changes will be marked as "hidden". They are still accessible with
-any `jj` command (`jj diff`, for example), but you will need to use the commit
-id to refer to hidden commits.
+You can see the actual history of working-copy changes using `jj evolog`. This
+shows the history of commits that have previously been the "working-copy
+commit", since the last time the change ID of the working-copy commit changed.
+Obsolete changes are marked as "hidden". They are still accessible with
+any `jj` command (`jj diff`, for example), but you need to use the commit
+ID to refer to these hidden commits.
 
-You can also use `jj evolog -r` on revisions that were previously the
-working-copy revisions (or on any other revisions). Use `jj evolog -p` as an
-easy way to see the evolution of the commit's contents.
+You can also use `jj evolog -r` on revisions that have previously been the
+working-copy revision (or indeed, on *any* revision). Use `jj evolog -p` as an
+easy way to see the evolution of a commit's contents.
 
 ### Can I prevent Jujutsu from recording my unfinished work? I'm not ready to commit it.
 
@@ -232,9 +233,9 @@ $ jj log
 
 Now you're ready to work:
 
-- Your work in progress _xxxxxxxx_ is the first parent of the merge commit.
-- The private commit _wwwwwwww_ is the second parent of the merge commit.
-- The working copy (_vvvvvvvv_) contains changes from both.
+* Your work in progress _xxxxxxxx_ is the first parent of the merge commit.
+* The private commit _wwwwwwww_ is the second parent of the merge commit.
+* The working copy (_vvvvvvvv_) contains changes from both.
 
 As you work, squash your changes using `jj squash --into xxxxxxxx`.
 
@@ -256,7 +257,7 @@ Parent commit      : yyyyyyyy b624cf12 Existing work
 To avoid pushing change _wwwwwwww_ by mistake, use the configuration
 [git.private-commits](config.md#set-of-private-commits):
 
-```
+```shell
 $ jj config set --user git.private-commits 'description(glob:"private:*")'
 ```
 
@@ -315,7 +316,7 @@ of them before abandoning it.
 ### How do I deal with conflicted bookmarks ('??' after bookmark name)?
 
 A [conflicted bookmark][bookmarks_conflicts] is a bookmark that refers to multiple
-different commits because jj couldn't fully resolve its desired position.
+different commits because `jj` couldn't fully resolve its desired position.
 Resolving conflicted bookmarks is usually done by setting the bookmark to the
 correct commit using `jj bookmark set <commit ID>`.
 
@@ -359,7 +360,7 @@ detect custom backends and more).
 [change ID]: glossary.md#change-id
 [co-located]: glossary.md#co-located-repos
 [commit ID]: glossary.md#commit-id
-[config]: config.md
+[config-default-revisions]: config.md#default-revisions
 
 [gerrit-integration]: https://gist.github.com/thoughtpolice/8f2fd36ae17cd11b8e7bd93a70e31ad6
 [gitignore]: https://git-scm.com/docs/gitignore
