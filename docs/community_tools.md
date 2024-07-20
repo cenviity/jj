@@ -12,12 +12,12 @@ already simplify many workflows and can improve your experience.
 Diffedit3 is a web-based alternate to Meld, as it no longer is packaged and
 available for all Distros. Its creator is also a frequent contributor.
 
-Find it [here][diffedit3]
+Find it [here][diffedit3].
 
 ## GG - GUI for JJ
 
 GG is a cross platform GUI for Jujutsu which makes all graph manipulating
-workflows quite easy. Take a look at its README.md as it quite descriptive.
+workflows quite easy. Take a look at its `README.md` as it is quite descriptive.
 
 Find it [here][gg].
 
