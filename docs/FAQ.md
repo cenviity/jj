@@ -1,6 +1,6 @@
 # Frequently asked questions
 
-### Why does my bookmark not move to the new commit after `jj new/commit`?
+### Why does my bookmark not move to the new commit after `jj new`/`commit`?
 
 If you're familiar with Git, you might expect the current bookmark to move forward
 when you commit. However, Jujutsu does not have a concept of a "current bookmark".
@@ -14,10 +14,10 @@ options:
 
 * Using `jj git push --change` will automatically create a bookmark and push it.
 * Using `jj bookmark` commands to create or move a bookmark to either the commit
-  you want to push or a descendant of it. Unlike Git, Jujutsu doesn't do this
+  you want to push or one of its descendants. Unlike Git, Jujutsu doesn't do this
   automatically (see previous question).
 
-### Where is my commit, why is it not visible in `jj log`?
+### Where is my commit? Why is it not visible in `jj log`?
 
 Is your commit visible with `jj log -r 'all()'`?
 
@@ -26,23 +26,23 @@ the repo by default. Most commits that exist on a remote are not shown. Local
 commits and their immediate parents (for context) are shown. The thinking is
 that you are more likely to interact with this set of commits. You can configure
 the set of revisions to show by default by overriding `revsets.log` as described
-in [config].
+in [config][config-default-revisions].
 
 If not, the revision may have been abandoned (e.g. because you
 used `jj abandon`, or because it's an obsolete version that's been rewritten
-with `jj rebase`, `jj describe`, etc). In that case, `jj log -r commit_id`
-should show the revision as "hidden". `jj new commit_id` should make the
+with `jj rebase`, `jj describe`, etc.). In that case, `jj log -r <commit_id>`
+should show the revision as "hidden". `jj new <commit_id>` should make the
 revision visible again.
 
 See [revsets] and [templates] for further guidance.
 
 ### What are elided revisions in the output of `jj log`? How can I display them?
 
-"Elided revisions" appears in the log when one revision descends from another,
+"Elided revisions" appear in the log when one revision descends from another and
 both are in the revset, but the revisions connecting them are _not_ in the
 revset.
 
-For example, suppose you log the revset `tyl|mus` which contains exactly two
+For example, suppose you log the revset `tyl|mus`, which contains exactly two
 revisions:
 
 ```sh
@@ -74,7 +74,8 @@ $ jj log -r 'connected(tyl|mus)'
 
 ### How can I get `jj log` to show me what `git log` would show me?
 
-Use `jj log -r ..`. The `..` [operator] lists all visible commits in the repo, excluding the root (which is never interesting and is shared by all repos).
+Use `jj log -r ..`. The `..` [operator] lists all visible commits in the repo, excluding
+the root (which is never interesting and is shared by all repos).
 
 ### Can I monitor how `jj log` evolves?
 
@@ -105,20 +106,20 @@ The wiki lists additional TUIs and GUIs beyond the terminal: [GUI-and-TUI](https
 Colocating a Jujutsu repository allows you to use both Jujutsu and Git in the
 same working copy. The benefits of doing so are:
 
-- You can use Git commands when you're not sure how to do something with
+* You can use Git commands when you're not sure how to do something with
   Jujutsu, Jujutsu hasn't yet implemented a feature (e.g., tagging), or you
   simply prefer Git in some situations.
 
-- Tooling that expects a Git repository still works (IDEs, build tooling, etc.)
+* Tooling that expects a Git repository still works (IDEs, build tooling, etc.)
 
 The [colocation documentation describes the
 drawbacks](git-compatibility.md#colocated-jujutsugit-repos) but the most
 important ones are:
 
-- Interleaving `git` and `jj` commands may create confusing bookmark conflicts
+* Interleaving `git` and `jj` commands may create confusing bookmark conflicts
   or divergent changes.
 
-- If the working copy commit or its parent contain any conflicted files, tools
+* If the working copy commit or its parent contain any conflicted files, tools
   expecting a Git repo may interpret the commit contents or its diff in a wrong
   and confusing way. You should avoid doing mutating operations with Git tools
   and ignore the confusing information such tools present for conflicted commits
@@ -127,7 +128,7 @@ important ones are:
   [\#3979](https://github.com/jj-vcs/jj/issues/3979) for plans to improve
   this situation.
 
-- Jujutsu commands may be a little slower in very large repositories due to
+* Jujutsu commands may be a little slower in very large repositories due to
   importing and exporting changes to Git. Most repositories are not noticeably
   affected by this.
 
@@ -137,29 +138,29 @@ you find a specific reason not to colocate.
 
 ### `jj` is said to record the working copy after `jj log` and every other command. Where can I see these automatic "saves"?
 
-Indeed, every `jj` command updates the current "working-copy" revision, marked
+Indeed, every `jj` command updates the current working-copy revision, marked
 with `@` in `jj log`. You can notice this by how the [commit ID] of the
-working copy revision changes when it's updated. Note that, unless you move to
+working-copy revision changes when it's updated. Note that, unless you move to
 another revision (with `jj new` or `jj edit`, for example), the [change ID] will
 not change.
 
-If you expected to see a historical view of your working copy changes in the
+If you expected to see a historical view of your working-copy changes in the
 parent-child relationships between commits you can see in `jj log`, this is
 simply not what they mean. What you can see in `jj log` is that after the
-working copy commit gets amended (after any edit), the commit ID changes.
+working-copy commit gets amended (after any edit), the commit ID changes.
 
-You can see the actual history of working copy changes using `jj evolog`. This
-will show the history of the commits that were previously the "working-copy
-commit", since the last time the change id of the working copy commit changed.
-The obsolete changes will be marked as "hidden". They are still accessible with
-any `jj` command (`jj diff`, for example), but you will need to use the commit
-id to refer to hidden commits.
+You can see the actual history of working-copy changes using `jj evolog`. This
+shows the history of commits that have previously been the "working-copy
+commit", since the last time the change ID of the working-copy commit changed.
+Obsolete changes are marked as "hidden". They are still accessible with
+any `jj` command (`jj diff`, for example), but you need to use the commit
+ID to refer to these hidden commits.
 
-You can also use `jj evolog -r` on revisions that were previously the
-working-copy revisions (or on any other revisions). Use `jj evolog -p` as an
-easy way to see the evolution of the commit's contents.
+You can also use `jj evolog -r` on revisions that have previously been the
+working-copy revision (or indeed, on _any_ revision). Use `jj evolog -p` as an
+easy way to see the evolution of a commit's contents.
 
-### Can I prevent Jujutsu from recording my unfinished work? I'm not ready to commit it.
+### Can I prevent Jujutsu from recording my unfinished work? I'm not ready to commit it
 
 Jujutsu automatically records new files in the current working-copy commit and
 doesn't provide a way to prevent that.
@@ -281,9 +282,9 @@ $ jj log
 
 Now you're ready to work:
 
-- Your work in progress _xxxxxxxx_ is the first parent of the merge commit.
-- The private commit _wwwwwwww_ is the second parent of the merge commit.
-- The working copy (_vvvvvvvv_) contains changes from both.
+* Your work in progress _xxxxxxxx_ is the first parent of the merge commit.
+* The private commit _wwwwwwww_ is the second parent of the merge commit.
+* The working copy (_vvvvvvvv_) contains changes from both.
 
 As you work, squash your changes using `jj squash --into xxxxxxxx`.
 
@@ -559,7 +560,7 @@ See: [Handling divergent commits](guides/divergence.md).
 ### How do I deal with conflicted bookmarks ('??' after bookmark name)?
 
 A [conflicted bookmark][bookmarks_conflicts] is a bookmark that refers to multiple
-different commits because jj couldn't fully resolve its desired position.
+different commits because `jj` couldn't fully resolve its desired position.
 Resolving conflicted bookmarks is usually done by setting the bookmark to the
 correct commit using `jj bookmark move <name> --to <commit ID>`.
 
@@ -628,7 +629,7 @@ revsets. This seemed unlikely to be accepted by the Git project.
 [colocated]: glossary.md#colocated-workspaces
 [commit ID]: glossary.md#commit-id
 [commits]: glossary.md#commit
-[config]: config.md
+[config-default-revisions]: config.md#default-revisions
 
 [gerrit-integration]: https://gist.github.com/thoughtpolice/8f2fd36ae17cd11b8e7bd93a70e31ad6
 [gitignore]: https://git-scm.com/docs/gitignore
