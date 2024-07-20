@@ -979,7 +979,7 @@ fn test_git_fetch_some_of_many_bookmarks(subprocess: bool) {
     insta::assert_snapshot!(stderr, @r###"
     bookmark: a1@origin [updated] tracked
     bookmark: b@origin  [updated] tracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     "###);
     }
     insta::allow_duplicates! {
@@ -1025,7 +1025,7 @@ fn test_git_fetch_some_of_many_bookmarks(subprocess: bool) {
     insta::allow_duplicates! {
     insta::assert_snapshot!(stderr, @r###"
     bookmark: a2@origin [updated] tracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     "###);
     }
     insta::allow_duplicates! {
@@ -1656,7 +1656,7 @@ fn test_git_fetch_removed_bookmark(subprocess: bool) {
     insta::allow_duplicates! {
     insta::assert_snapshot!(stderr, @r###"
     bookmark: a2@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     "###);
     insta::assert_snapshot!(get_log_output(&test_env, &target_jj_repo_path), @r#"
     @  230dd059e1b0
@@ -1759,7 +1759,7 @@ fn test_git_fetch_removed_parent_bookmark(subprocess: bool) {
     insta::assert_snapshot!(stderr, @r###"
     bookmark: a1@origin     [deleted] untracked
     bookmark: trunk1@origin [deleted] untracked
-    Abandoned 1 commits that are no longer reachable.
+    Abandoned 1 commit that is no longer reachable.
     Warning: No branch matching `master` found on any specified/configured remote
     "###);
     }
