@@ -252,8 +252,7 @@ or `master@upstream`.
 
 You might want to `jj git fetch` from "upstream" and to `jj git push`
 to "origin". You can configure the default remotes to fetch from and
-push to in your configuration file
-(`jj config edit --user|repo|workspace`):
+push to in your [configuration file](config.md#config-files-and-toml):
 
 ```toml
 [git]
