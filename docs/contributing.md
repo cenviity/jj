@@ -1,6 +1,5 @@
 # How to Contribute
 
-
 ## Policies
 
 We'd love to accept your patches and contributions to this project. There are
@@ -109,7 +108,6 @@ sources, currently from the [`cli/src/commands`
 directory](https://github.com/jj-vcs/jj/tree/main/cli/src/commands). Working
 on them requires setting up a Rust development environment, as described
 below, and may occasionally require adjusting a test.
-
 
 ## Learning Rust
 
@@ -432,7 +430,6 @@ to avoid files that will be overwritten by future invocations of `mike`. Then,
 you can submit a PR based on the `gh-pages` bookmark of
 <https://martinvonz.github.com/jj> (instead of the usual `main` bookmark).
 
-
 ## Modifying protobuffers (this is not common)
 
  Occasionally, you may need to change the `.proto` files that define jj's data
@@ -469,16 +466,20 @@ using `--debug`.
 
 One easy-to-use sampling profiler
 is [samply](https://github.com/mstange/samply). For example:
+
 ```shell
 cargo install samply
 samply record jj diff
 ```
+
 Then just open the link it prints.
 
 Another option is to use the instrumentation we've added manually (using
 `tracing::instrument`) in various places. For example:
+
 ```shell
 JJ_TRACE=/tmp/trace.json jj diff
 ```
+
 Then go to `https://ui.perfetto.dev/` in Chrome and load `/tmp/trace.json` from
 there.
