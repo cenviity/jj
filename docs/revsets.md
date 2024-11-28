@@ -294,7 +294,7 @@ revsets (expressions) as arguments.
   `remote_bookmarks()`.
 
 * `tags([pattern])`: All tag targets. If `pattern` is specified, this selects
-  the tags whose name match the given [string pattern](#string-patterns). For
+  the tags whose name matches the given [string pattern](#string-patterns). For
   example, `tags(*v1*)` would match the tags `v123` and `rev1` but not the tag
   `v2`. If a tag is in a conflicted state, all its possible targets are
   included.
