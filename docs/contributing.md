@@ -1,6 +1,5 @@
 # How to Contribute
 
-
 ## Policies
 
 We'd love to accept your patches and contributions to this project. There are
@@ -455,7 +454,6 @@ served from. This bug should now be fixed, but if you are not serving the site
 from https://jj-vcs.github.com/jj and something does not work weirdly, you might
 want to adjust the `site_url` to something like `https://jjfan.github.io/jj`.
 
-
 ## Modifying protobuffers (this is not common)
 
  Occasionally, you may need to change the `.proto` files that define jj's data
@@ -492,16 +490,20 @@ turns on `debug` log level for `jj-lib` and `jj-cli` only.
 
 One easy-to-use sampling profiler
 is [samply](https://github.com/mstange/samply). For example:
+
 ```shell
 cargo install samply
 samply record jj diff
 ```
+
 Then just open the link it prints.
 
 Another option is to use the instrumentation we've added manually (using
 `tracing::instrument`) in various places. For example:
+
 ```shell
 JJ_TRACE=/tmp/trace.json jj diff
 ```
+
 Then go to `https://ui.perfetto.dev/` in Chrome and load `/tmp/trace.json` from
 there.
