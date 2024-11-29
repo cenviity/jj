@@ -594,25 +594,25 @@ to adjust the `site_url` to something like `https://jjfan.github.io/jj`.
 
 ## Modifying protobuffers (this is not common)
 
- Occasionally, you may need to change the `.proto` files that define jj's data
- storage format. In this case, you will need to add a few steps to the above
- workflow.
+Occasionally, you may need to change the `.proto` files that define jj's data
+storage format. In this case, you will need to add a few steps to the above
+workflow.
 
- - Install the `protoc` compiler. This usually means either `apt-get install
+- Install the `protoc` compiler. This usually means either `apt-get install
    protobuf-compiler` or downloading [an official release]. The
    `prost` [library docs] have additional advice.
- - Run `cargo run -p gen-protos` regularly (or after every edit to a `.proto`
+- Run `cargo run -p gen-protos` regularly (or after every edit to a `.proto`
    file). This is the same as running `cargo run` from `lib/gen-protos`. The
    `gen-protos` binary will use the `prost-build` library to compile the
    `.proto` files into `.rs` files.
- - If you are adding a new `.proto` file, you will need to edit the list of
+- If you are adding a new `.proto` file, you will need to edit the list of
    these files in `lib/gen-protos/src/main.rs`.
 
 [an official release]: https://github.com/protocolbuffers/protobuf/releases
 [library docs]: https://docs.rs/prost-build/latest/prost_build/#sourcing-protoc
 
- The `.rs` files generated from `.proto` files are included in the repository,
- and there is a GitHub CI check that will complain if they do not match.
+The `.rs` files generated from `.proto` files are included in the repository,
+and there is a GitHub CI check that will complain if they do not match.
 
 ## Logging
 
