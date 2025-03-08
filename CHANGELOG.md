@@ -141,7 +141,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * This release takes the first steps to make target revision required in
   `bookmark create`, `bookmark move` and `bookmark set`. Those commands will display
-  a warning if the user does not specify target revision  explicitly. In the near
+  a warning if the user does not specify target revision explicitly. In the near
   future those commands will fail if target revision is not specified.
 
 * The `signing.sign-all` config option has been deprecated in favor of
