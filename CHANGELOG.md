@@ -139,7 +139,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   customize the default operation id representation.
 
 * The `jj init`/`jj revert` stubs that print errors can now be overridden with
-  aliases. All of `jj clone/init/revert` add a hint to a generic error.
+  aliases. All of `jj clone`/`jj init`/`jj revert` add a hint to a generic error.
 
 * Help text is now colored (when stdout is a terminal).
 
