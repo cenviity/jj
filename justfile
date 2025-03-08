@@ -3,6 +3,7 @@ alias f := fetch
 alias rb := rebase
 alias ps := push
 alias i := install
+alias d := docs
 
 pull: fetch rebase
 
@@ -17,3 +18,6 @@ push:
 
 install:
     cargo install --path ./cli/ --locked --bin jj jj-cli
+
+docs:
+    uv run mkdocs serve
