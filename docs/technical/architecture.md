@@ -13,7 +13,7 @@ crate, but it is meant to also be usable from a GUI or TUI, or in a server
 serving requests from multiple users. As a result, the library should avoid
 interacting directly with the user via the terminal or by other means; all
 input/output is handled by the CLI crate [^1]. Since the library crate is meant
-to usable in a server, it also cannot read configuration from the user's home
+to be usable in a server, it also cannot read configuration from the user's home
 directory, or from user-specific environment variables.
 
 [^1]: There are a few exceptions, such as for messages printed during automatic
