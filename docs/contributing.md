@@ -154,9 +154,7 @@ One-time setup:
 ```shell
 rustup toolchain install nightly  # wanted for 'rustfmt'
 rustup toolchain install 1.89     # also specified in Cargo.toml
-cargo install --locked bacon
-cargo install --locked cargo-insta
-cargo install --locked cargo-nextest
+cargo install --locked bacon cargo-insta cargo-nextest
 ```
 
 During development (adapt according to your preference):
