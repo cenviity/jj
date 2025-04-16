@@ -140,8 +140,8 @@ recommended steps.
 One-time setup:
 
 ```shell
-rustup toolchain add nightly  # wanted for 'rustfmt'
-rustup toolchain add 1.85     # also specified in Cargo.toml
+rustup toolchain install nightly  # wanted for 'rustfmt'
+rustup toolchain install 1.85     # also specified in Cargo.toml
 cargo install --locked bacon
 cargo install --locked cargo-insta
 cargo install --locked cargo-nextest
