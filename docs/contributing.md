@@ -152,10 +152,13 @@ recommended steps.
 One-time setup:
 
 ```shell
-rustup toolchain install nightly  # wanted for 'rustfmt'
-rustup toolchain install 1.89     # also specified in Cargo.toml
+rustup toolchain install nightly  # (1)!
+rustup toolchain install 1.89     # (2)!
 cargo install --locked bacon cargo-insta cargo-nextest
 ```
+
+1. Wanted for `rustfmt`.
+2. Also specified in `Cargo.toml`.
 
 During development (adapt according to your preference):
 
