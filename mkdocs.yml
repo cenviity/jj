@@ -16,6 +16,7 @@ theme:
     - content.code.copy
     - content.tabs.link
     - navigation.instant
+    - search.suggest
 
   font:
     # This has the relevant symbols used in the log.
@@ -82,6 +83,7 @@ markdown_extensions:
   - admonition
   - codehilite:
       guess_lang: false
+  - def_list
   - extra
   # Fixes weird concatenation of list items that happens sometimes when
   # there is not a paragraph break between them and one of them has
