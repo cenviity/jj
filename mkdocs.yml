@@ -14,6 +14,7 @@ theme:
     # - navigation.top
     - content.action.edit
     - content.code.copy
+    - navigation.instant
 
   icon:
     repo: fontawesome/brands/github
@@ -48,30 +49,39 @@ extra:
 validation:
   anchors: warn
 
-# IMPORTANT: any changes to plugins have to be duplicated in
-# `mkdocs-offline.yml`. See that file for more details.
 plugins:
+  - group:
+      # If you plan to use the rendered docs from your file system, run:
+      #   MKDOCS_OFFLINE=true uv run mkdocs build
+      enabled: !ENV [MKDOCS_OFFLINE, false]
+      plugins:
+        - offline
+  - include-markdown # For the CLI reference
   - mike:
       # Should help search engines point to latest docs
       # instead of (often obsolete) v?.??.? docs.
       # TODO: Arguably, this could be `prerelease` when building prerelease docs.
       canonical_version: latest
-  - include-markdown # For the CLI reference
-  - search
   - redirects:
       redirect_maps:
         branches.md: bookmarks.md
+  - search
+  - table-reader:
+      data_path: docs
+      select_readers:
+        - read_yaml
 
 # Not all of these may be necessary, especially since the material
 # theme substitutes for some of them
 markdown_extensions:
-  - toc:
-      permalink: true
-  - extra
-  - sane_lists
   - admonition
   - codehilite:
       guess_lang: false
+  - extra
+  # Fixes weird concatenation of list items that happens sometimes when
+  # there is not a paragraph break between them and one of them has
+  # multiple paragraphs.
+  - mdx_breakless_lists
   # Allows list items with several paragraphs to be indented two spaces instead
   # of four (like GitHub markdown)
   - mdx_truly_sane_lists:
@@ -79,22 +89,24 @@ markdown_extensions:
       # With `truly_sane: true`, together with breakless lists, it often splits
       # a single list in two.
       truly_sane: false
-  # Fixes weird concatenation of list items that happens sometimes when
-  # there is not a paragraph break between them and one of them has
-  # multiple paragraphs.
-  - mdx_breakless_lists
-  - pymdownx.tabbed:
-      alternate_style: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.snippets
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.details
-  - pymdownx.snippets
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - sane_lists
+  - toc:
+      permalink: true
 
 nav: # This lists all the files that become part of the documentation
   - Home: 'index.md'
@@ -142,6 +154,7 @@ nav: # This lists all the files that become part of the documentation
   - Contributing:
       - Guidelines and "How to...?": 'contributing.md'
       - Code of conduct: 'code-of-conduct.md'
+      - Style guide: 'style_guide.md'
       - Design docs: 'design_docs.md'
       - Design doc blueprint: 'design_doc_blueprint.md'
       - Releasing: 'releasing.md'
