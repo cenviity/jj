@@ -50,28 +50,55 @@ Jujutsu attempts to resolve a symbol in the following order:
 The following operators are supported. `x` and `y` below can be any revset, not
 only symbols.
 
-* `x-`: Parents of `x`, can be empty.
-* `x+`: Children of `x`, can be empty.
-* `x::`: Descendants of `x`, including the commits in `x` itself. Shorthand for
+`x-`
+: Parents of `x`, can be empty.
+
+`x+`
+: Children of `x`, can be empty.
+
+`x::`
+: Descendants of `x`, including the commits in `x` itself. Shorthand for
   `x::visible_heads()`.
-* `x..`: Revisions that are not ancestors of `x`. Shorthand for
+
+`x..`
+: Revisions that are not ancestors of `x`. Shorthand for
   `x..visible_heads()`.
-* `::x`: Ancestors of `x`, including the commits in `x` itself. Shorthand for
+
+`::x`
+: Ancestors of `x`, including the commits in `x` itself. Shorthand for
   `root()::x`.
-* `..x`: Ancestors of `x`, including the commits in `x` itself, but excluding
+
+`..x`
+: Ancestors of `x`, including the commits in `x` itself, but excluding
   the root commit. Shorthand for `root()..x`. Equivalent to `::x ~ root()`.
-* `x::y`: Descendants of `x` that are also ancestors of `y`. Equivalent
+
+`x::y`
+: Descendants of `x` that are also ancestors of `y`. Equivalent
    to `x:: & ::y`. This is what `git log` calls `--ancestry-path x..y`.
-* `x..y`: Ancestors of `y` that are not also ancestors of `x`. Equivalent to
+
+`x..y`
+: Ancestors of `y` that are not also ancestors of `x`. Equivalent to
   `::y ~ ::x`. This is what `git log` calls `x..y` (i.e. the same as we call it).
-* `::`: All visible commits in the repo. Shorthand for
+
+`::`
+: All visible commits in the repo. Shorthand for
   `root()::visible_heads()`. Equivalent to `all()`.
-* `..`: All visible commits in the repo, but excluding the root commit.
+
+`..`
+: All visible commits in the repo, but excluding the root commit.
   Shorthand for `root()..visible_heads()`. Equivalent to `~root()`.
-* `~x`: Revisions that are not in `x`.
-* `x & y`: Revisions that are in both `x` and `y`.
-* `x ~ y`: Revisions that are in `x` but not in `y`.
-* `x | y`: Revisions that are in either `x` or `y` (or both).
+
+`~x`
+: Revisions that are not in `x`.
+
+`x & y`
+: Revisions that are in both `x` and `y`.
+
+`x ~ y`
+: Revisions that are in `x` but not in `y`.
+
+`x | y`
+: Revisions that are in either `x` or `y` (or both).
 
 (listed in order of binding strengths)
 
@@ -503,7 +530,6 @@ for a comprehensive list.
   Note that modifying this will *not* change whether a commit is immutable.
   To do that, edit `immutable_heads()`.
 
-
 ## The `all:` modifier
 
 Certain commands (such as `jj rebase`) can take multiple revset arguments, and
@@ -577,7 +603,6 @@ jj log -r 'tags() | bookmarks()'
 
 Show local commits leading up to the working copy, as well as descendants of
 those commits:
-
 
 ```shell
 jj log -r '(remote_bookmarks()..@)::'
