@@ -13,6 +13,7 @@ theme:
   features:
     # - navigation.top
     - content.action.edit
+    - content.code.annotate
     - content.code.copy
     - content.tabs.link
     - navigation.instant
