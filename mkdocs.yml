@@ -16,6 +16,7 @@ theme:
     - content.code.copy
     - content.tabs.link
     - navigation.instant
+    - search.suggest
 
   font:
     # This has the relevant symbols used in the log.
