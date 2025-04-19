@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Jujutsu—a version control system
 
 <figure>
