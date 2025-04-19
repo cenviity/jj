@@ -15,6 +15,7 @@ theme:
     - content.action.edit
     - content.code.copy
     - navigation.instant
+    - search.suggest
 
   icon:
     repo: fontawesome/brands/github
