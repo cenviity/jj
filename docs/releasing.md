@@ -14,8 +14,12 @@ to run something like this:
 
 ```shell
 root=$(jj log --no-graph -r 'heads(tags(glob:"v*.*.*") & ::trunk())' -T 'commit_id')
-gh api "/repos/jj-vcs/jj/compare/$root...main" --paginate \
-| jq -r '.commits[] | select(.author.login | endswith("[bot]") | not) | "* " + .commit.author.name + " (@" + .author.login + ")"' | sort -fu
+jq_filter='
+   .commits[] |
+   select(.author.login | endswith("[bot]") | not) |
+   "* " + .commit.author.name + " (@" + .author.login + ")"
+'
+gh api "/repos/jj-vcs/jj/compare/$root...main" --paginate -q $jq_filter | sort -fu
 ```
 
 https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#compare-two-commits
