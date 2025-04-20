@@ -26,11 +26,15 @@ You may want to jump to:
 - Documentation for the [unreleased version of `jj`](https://docs.jj-vcs.dev/prerelease). This version of the docs corresponds to the `main` branch of the `jj` repo.
 - [GitHub repo for `jj`](https://github.com/jj-vcs/jj).
 
-## Some useful links
+## Quick links
 
-- [Installation and setup](install-and-setup.md)
-- [Tutorial and bird's eye view](tutorial.md)
-- [Working with Gerrit](gerrit.md)
-- [Working with GitHub](github.md)
-- [Development roadmap](roadmap.md)
-- [Changelog](changelog.md)
+<div class="grid cards" markdown>
+
+- :fontawesome-solid-gear:&numsp;[Installation and setup](install-and-setup.md)
+- :fontawesome-solid-book:&numsp;[Tutorial and bird's eye view](tutorial.md)
+- :simple-gerrit:&numsp;[Working with Gerrit](gerrit.md)
+- :fontawesome-brands-github:&numsp;[Working with GitHub](github.md)
+- :fontawesome-solid-map:&numsp;[Development roadmap](roadmap.md)
+- :fontawesome-solid-flag-checkered::&numsp;[Changelog](changelog.md)
+
+</div>
