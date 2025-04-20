@@ -24,11 +24,10 @@ You may want to jump to:
 
 - Documentation for the [latest released version of `jj`](https://jj-vcs.github.io/jj/latest).
 - Documentation for the [unreleased version of `jj`](https://jj-vcs.github.io/jj/prerelease). This version of the docs corresponds to the `main` branch of the `jj` repo.
+- [GitHub repo for `jj`](https://github.com/jj-vcs/jj).
 
 ## Some useful links
 
-- [GitHub repo for `jj`](https://github.com/jj-vcs/jj)
-- Overview of `jj` in the repo's [README](https://github.com/jj-vcs/jj?tab=readme-ov-file#readme)
 - [Installation and setup](install-and-setup.md)
 - [Tutorial and bird's eye view](tutorial.md)
 - [Working with GitHub](github.md)
