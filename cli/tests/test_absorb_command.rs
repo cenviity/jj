@@ -425,7 +425,7 @@ fn test_absorb_conflict() {
     let output = work_dir.run_jj(["rebase", "-r@", "-dsubject(1)"]);
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
-    Rebased 1 commits to destination
+    Rebased 1 commits to destination.
     Working copy  (@) now at: kkmpptxz 4ab5d3e5 (conflict) (no description set)
     Parent commit (@-)      : qpvuntsm e35bcaff 1
     Added 0 files, modified 1 files, removed 0 files
