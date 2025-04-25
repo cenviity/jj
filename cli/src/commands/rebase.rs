@@ -588,19 +588,19 @@ fn print_move_commits_stats(ui: &Ui, stats: &MoveCommitsStats) -> std::io::Resul
     if num_skipped_rebases > 0 {
         writeln!(
             formatter,
-            "Skipped rebase of {num_skipped_rebases} commits that were already in place"
+            "Skipped rebase of {num_skipped_rebases} commits that were already in place."
         )?;
     }
     if num_rebased_targets > 0 {
         writeln!(
             formatter,
-            "Rebased {num_rebased_targets} commits to destination"
+            "Rebased {num_rebased_targets} commits to destination."
         )?;
     }
     if num_rebased_descendants > 0 {
         writeln!(
             formatter,
-            "Rebased {num_rebased_descendants} descendant commits"
+            "Rebased {num_rebased_descendants} descendant commits."
         )?;
     }
     if num_abandoned_empty > 0 {
