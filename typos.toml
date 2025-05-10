@@ -1,0 +1,25 @@
+[files]
+extend-exclude = ["target/"]
+
+[default]
+extend-ignore-re = [
+    '^\* .+? \(@.+\)$',
+    "-{5}BEGIN (SIGNED MESSAGE|PGP PRIVATE KEY BLOCK|PKCS12)-{5}(($|[^-]+)+-{5}END)",
+    "^JJ: Author: .+$",
+]
+extend-ignore-identifiers-re = [
+    "[0-9a-f]{8,12}", # Git hashes
+]
+
+[default.extend-words]
+durin = "durin"
+Ove = "Ove"
+PNG = "PNG"
+PNGs = "PNGs"
+ratatui = "ratatui"
+Wirth = "Wirth"
+
+[default.extend-identifiers]
+abd = "abd"
+ba = "ba"
+PNGs = "PNGs"
