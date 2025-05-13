@@ -362,8 +362,7 @@ impl Progress {
 
         let bar_width = output
             .term_width()
-            .map(usize::from)
-            .unwrap_or(0)
+            .map_or(0, usize::from)
             .saturating_sub(self.buffer.len() - control_chars + 2);
         self.buffer.push('[');
         draw_progress(progress.overall(), &mut self.buffer, bar_width);
