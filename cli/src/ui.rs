@@ -665,9 +665,8 @@ impl Ui {
             if input.is_empty() {
                 if let Some((value, _)) = default {
                     return Ok(value);
-                } else {
-                    continue;
                 }
+                continue;
             }
             match parse(input) {
                 Ok(value) => return Ok(value),
