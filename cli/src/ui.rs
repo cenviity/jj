@@ -110,7 +110,7 @@ impl UiOutput {
 
     fn finalize(self, ui: &Ui) {
         match self {
-            UiOutput::Terminal { .. } => { /* no-op */ }
+            UiOutput::Terminal { .. } | UiOutput::Null => { /* no-op */ }
             UiOutput::Paged {
                 mut child,
                 child_stdin,
@@ -150,7 +150,6 @@ impl UiOutput {
                     }
                 }
             }
-            UiOutput::Null => {}
         }
     }
 }
@@ -470,9 +469,7 @@ impl Ui {
     pub fn use_progress_indicator(&self) -> bool {
         match &self.output {
             UiOutput::Terminal { stderr, .. } => self.progress_indicator && stderr.is_terminal(),
-            UiOutput::Paged { .. } => false,
-            UiOutput::BuiltinPaged { .. } => false,
-            UiOutput::Null => false,
+            UiOutput::Paged { .. } | UiOutput::BuiltinPaged { .. } | UiOutput::Null => false,
         }
     }
 
