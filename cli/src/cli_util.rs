@@ -2300,11 +2300,11 @@ See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy \
 
         if !root_conflict_commits.is_empty() {
             let instruction = if only_one_conflicted_commit {
-                "To resolve the conflicts, start by updating to it"
+                "To resolve the conflicts, start by creating a change on top of the conflicted change"
             } else if root_conflict_commits.len() == 1 {
-                "To resolve the conflicts, start by updating to the first one"
+                "To resolve the conflicts, start by creating a change on top of the first conflicted change"
             } else {
-                "To resolve the conflicts, start by updating to one of the first ones"
+                "To resolve the conflicts, start by creating a change on top of one of the first conflicted changes"
             };
             writeln!(fmt.labeled("hint").with_heading("Hint: "), "{instruction}:")?;
             let format_short_change_id = self.short_change_id_template();
