@@ -13,7 +13,6 @@
 // limitations under the License.
 
 use clap_complete::ArgValueCandidates;
-use itertools::Itertools as _;
 use jj_lib::object_id::ObjectId as _;
 use jj_lib::op_store::OpStoreError;
 use jj_lib::operation::Operation;
@@ -47,12 +46,10 @@ pub struct OperationUndoArgs {
     what: Vec<UndoWhatToRestore>,
 }
 
-fn is_undo(op: &Operation, parent_op: &Operation) -> Result<bool, OpStoreError> {
-    let grand_parents: Vec<_> = parent_op.parents().try_collect()?;
-    if let [grand_parent_op] = &grand_parents[..] {
-        Ok(op.view_id() == grand_parent_op.view_id())
-    } else {
-        Ok(false)
+fn is_undo(op: &Operation) -> Result<bool, OpStoreError> {
+    match op.metadata().tags.get("args") {
+        Some(args) => Ok(args == "jj undo" || args == "jj op undo"),
+        None => Ok(false),
     }
 }
 
@@ -90,7 +87,7 @@ pub fn cmd_op_undo(
     }
     tx.finish(ui, format!("undo operation {}", bad_op.id().hex()))?;
 
-    if args.operation == "@" && is_undo(&bad_op, &parent_op)? {
+    if args.operation == "@" && is_undo(&bad_op)? {
         writeln!(
             ui.hint_default(),
             "This action reverted an 'undo' operation. The repository is now in the same state as \
