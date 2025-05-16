@@ -11,7 +11,7 @@ fetch:
     jj git fetch
 
 rebase:
-    jj rebase -d main
+    jj rebase -s 'all:main+' -d main
 
 push:
     jj git push --all
