@@ -47,12 +47,26 @@ pub struct OperationUndoArgs {
     what: Vec<UndoWhatToRestore>,
 }
 
+/// @ undo (undo s)
+/// parent undo s
+/// grandparent s
+/// great-grandparent
+///
+/// @ undo s
+/// parent s
+/// grandparent undo s
+/// great-grandparent s
 fn is_undo(op: &Operation, parent_op: &Operation) -> Result<bool, OpStoreError> {
     let grand_parents: Vec<_> = parent_op.parents().try_collect()?;
     let [grand_parent_op] = &grand_parents[..] else {
         return Ok(false);
     };
-    Ok(op.view_id() == grand_parent_op.view_id())
+    let great_grand_parents: Vec<_> = grand_parent_op.parents().try_collect()?;
+    let [great_grand_parent_op] = &great_grand_parents[..] else {
+        return Ok(false);
+    };
+    Ok(op.view_id() == grand_parent_op.view_id()
+        && parent_op.view_id() != great_grand_parent_op.view_id())
 }
 
 pub fn cmd_op_undo(
