@@ -49,11 +49,10 @@ pub struct OperationUndoArgs {
 
 fn is_undo(op: &Operation, parent_op: &Operation) -> Result<bool, OpStoreError> {
     let grand_parents: Vec<_> = parent_op.parents().try_collect()?;
-    if let [grand_parent_op] = &grand_parents[..] {
-        Ok(op.view_id() == grand_parent_op.view_id())
-    } else {
-        Ok(false)
-    }
+    let [grand_parent_op] = &grand_parents[..] else {
+        return Ok(false);
+    };
+    Ok(op.view_id() == grand_parent_op.view_id())
 }
 
 pub fn cmd_op_undo(
