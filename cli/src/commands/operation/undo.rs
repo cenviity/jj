@@ -46,11 +46,10 @@ pub struct OperationUndoArgs {
     what: Vec<UndoWhatToRestore>,
 }
 
-fn is_undo(op: &Operation) -> Result<bool, OpStoreError> {
-    match op.metadata().tags.get("args") {
-        Some(args) => Ok(args == "jj undo" || args == "jj op undo"),
-        None => Ok(false),
-    }
+fn is_undo(op: &Operation) -> bool {
+    let tags = &op.metadata().tags;
+    let args = tags.get("args").expect("`args` key should exist");
+    args == "jj undo" || args == "jj op undo"
 }
 
 pub fn cmd_op_undo(
@@ -87,7 +86,7 @@ pub fn cmd_op_undo(
     }
     tx.finish(ui, format!("undo operation {}", bad_op.id().hex()))?;
 
-    if args.operation == "@" && is_undo(&bad_op)? {
+    if args.operation == "@" && is_undo(&bad_op) {
         writeln!(
             ui.hint_default(),
             "This action reverted an 'undo' operation. The repository is now in the same state as \
