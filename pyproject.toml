@@ -6,7 +6,9 @@ name = "jj-docs"
 description = "Sets up MkDocs and related Python tools"
 requires-python = ">=3.9"
 version = "0.1.0"
-dependencies = []
+dependencies = [
+    "markdown-exec[ansi]>=1.10.3",
+]
 
 [dependency-groups]
 # These can be updated with `uv add --dev`.
