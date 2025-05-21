@@ -64,7 +64,7 @@ use crate::ui::Ui;
 /// achieved with `jj new`.
 #[derive(clap::Args, Clone, Debug)]
 pub(crate) struct SplitArgs {
-    /// Interactively choose which parts to split
+    /// Interactively choose which changes to split out from the revision
     ///
     /// This is the default if no filesets are provided.
     #[arg(long, short)]
