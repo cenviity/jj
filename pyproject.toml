@@ -6,7 +6,9 @@ name = "jj-docs"
 description = "Sets up MkDocs and related Python tools"
 requires-python = ">=3.9"
 version = "0.1.0"
-dependencies = []
+dependencies = [
+    "mkdocs-print-site-plugin>=2.7.3",
+]
 
 [dependency-groups]
 # These can be updated with `uv add --dev`.
