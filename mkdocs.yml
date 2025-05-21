@@ -61,6 +61,7 @@ plugins:
       enabled: !ENV [MKDOCS_OFFLINE, false]
       plugins:
         - offline
+        - tags
   - include-markdown # For the CLI reference
   - mike:
       # Should help search engines point to latest docs
@@ -75,6 +76,10 @@ plugins:
       data_path: docs
       select_readers:
         - read_yaml
+  # Keep `print-site` at the bottom of the plugins list, because other plugins might
+  # alter the site (like the navigation), and you want these changes included in the
+  # print page.
+  - print-site
 
 # Not all of these may be necessary, especially since the material
 # theme substitutes for some of them
