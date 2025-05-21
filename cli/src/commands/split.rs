@@ -109,7 +109,7 @@ use crate::ui::Ui;
 #[derive(clap::Args, Clone, Debug)]
 #[command(verbatim_doc_comment)]
 pub(crate) struct SplitArgs {
-    /// Interactively choose which parts to split
+    /// Interactively choose which changes to split out from the revision
     ///
     /// This is the default if no filesets are provided.
     #[arg(long, short)]
