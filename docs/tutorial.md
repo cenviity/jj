@@ -38,6 +38,18 @@ Added 1 files, modified 0 files, removed 0 files
 $ cd Hello-World
 ```
 
+```console exec="1" source="console" result="console"
+$ rm -rf /tmp/tmp.O1DWMiaKd4/  # markdown-exec: hide
+$ mkdir -p /tmp/tmp.O1DWMiaKd4/  # markdown-exec: hide
+$ cd /tmp/tmp.O1DWMiaKd4/  # markdown-exec: hide
+$ jj git clone https://github.com/octocat/Hello-World
+```
+
+```console exec="1" source="console" result="console"
+$ cd /tmp/tmp.O1DWMiaKd4/  # markdown-exec: hide
+$ cd Hello-World
+```
+
 Running `jj st` (short for `jj status`) now yields something like this:
 
 ```shell
@@ -45,6 +57,11 @@ $ jj st
 The working copy has no changes.
 Working copy  (@) : kntqzsqt d7439b06 (empty) (no description set)
 Parent commit (@-): orrkosyo 7fd1a60b master | (empty) Merge pull request #6 from Spaceghost/patch-1
+```
+
+```console exec="1" source="console" result="console"
+$ cd /tmp/tmp.O1DWMiaKd4/Hello-World  # markdown-exec: hide
+$ jj st
 ```
 
 Let's look at that output as it introduces new concepts. You can see two
