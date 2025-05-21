@@ -214,19 +214,25 @@ transition once we default to these new completions.
 
 ### Bash
 
-=== "Standard"
-
-    ```shell
-    source <(jj util completion bash)
-    ```
-
 === "Dynamic"
 
     ```shell
     source <(COMPLETE=bash jj)
     ```
 
+=== "Standard"
+
+    ```shell
+    source <(jj util completion bash)
+    ```
+
 ### Zsh
+
+=== "Dynamic"
+
+    ```shell
+    source <(COMPLETE=zsh jj)
+    ```
 
 === "Standard"
 
@@ -236,28 +242,22 @@ transition once we default to these new completions.
     source <(jj util completion zsh)
     ```
 
-=== "Dynamic"
-
-    ```shell
-    source <(COMPLETE=zsh jj)
-    ```
-
 ### Fish
 
 !!! note
 
     No configuration is required with fish >= 4.0.2 which loads dynamic completions by default.
 
-=== "Standard"
-
-    ```shell
-    jj util completion fish | source
-    ```
-
 === "Dynamic"
 
     ```shell
     COMPLETE=fish jj | source
+    ```
+
+=== "Standard"
+
+    ```shell
+    jj util completion fish | source
     ```
 
 ### Nushell
