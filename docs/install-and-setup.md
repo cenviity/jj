@@ -231,19 +231,25 @@ issues with dynamic completions.
 
 ### Bash
 
-=== "Standard"
-
-    ```shell
-    source <(jj util completion bash)
-    ```
-
 === "Dynamic"
 
     ```shell
     source <(COMPLETE=bash jj)
     ```
 
+=== "Standard"
+
+    ```shell
+    source <(jj util completion bash)
+    ```
+
 ### Zsh
+
+=== "Dynamic"
+
+    ```shell
+    source <(COMPLETE=zsh jj)
+    ```
 
 === "Standard"
 
@@ -253,19 +259,7 @@ issues with dynamic completions.
     source <(jj util completion zsh)
     ```
 
-=== "Dynamic"
-
-    ```shell
-    source <(COMPLETE=zsh jj)
-    ```
-
 ### Fish
-
-=== "Standard"
-
-    ```shell
-    jj util completion fish | source
-    ```
 
 === "Dynamic"
 
@@ -275,6 +269,12 @@ issues with dynamic completions.
 
     ```shell
     COMPLETE=fish jj | source
+    ```
+
+=== "Standard"
+
+    ```shell
+    jj util completion fish | source
     ```
 
 ### Nushell
