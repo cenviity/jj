@@ -123,6 +123,24 @@ jobs:
           asset_path: ${{ env.ASSET }}
           asset_name: ${{ env.ASSET }}
           asset_content_type: application/octet-stream
+      - name: Compile single-page docs and zip them up
+        run: |
+          MKDOCS_OFFLINE=true uv run mkdocs build
+          archive="jj-${RELEASE_TAG_NAME}-docs-html-single-page.tar.gz"
+          tar czf "$archive" -C "rendered-docs" .
+          echo "ASSET=$archive" >> $GITHUB_ENV
+        env:
+          MKDOCS_OFFLINE: true
+          RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
+      - name: Upload release archive
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.ASSET }}
+          asset_name: ${{ env.ASSET }}
+          asset_content_type: application/octet-stream
 
   docs-deploy-website-latest-release:
     runs-on: ubuntu-24.04
