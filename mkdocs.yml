@@ -64,6 +64,7 @@ plugins:
       plugins:
         - offline
   - include-markdown # For the CLI reference
+  - markdown-exec
   - mike:
       # Should help search engines point to latest docs
       # instead of (often obsolete) v?.??.? docs.
