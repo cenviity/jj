@@ -2553,6 +2553,7 @@ dependencies = [
  "pollster",
  "proptest",
  "proptest-state-machine",
+ "pygmentize",
  "rand 0.10.1",
  "rand_chacha 0.10.0",
  "ratatui",
@@ -3569,6 +3570,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8991c4cbdb8bc5b11f0b074ffe286c30e523de90fee5ba8132f1399f23cb3dd7"
 dependencies = [
  "prost",
+]
+
+[[package]]
+name = "pygmentize"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee7d15fa1e045a1c43cec886ec58bd58e845176654119930d3642d84be69b453"
+dependencies = [
+ "winapi-util",
 ]
 
 [[package]]
