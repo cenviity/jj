@@ -98,6 +98,7 @@ smallvec = { version = "1.14.0", features = [
 strsim = "0.11.1"
 syn = "2.0.101"
 tempfile = "3.20.0"
+termimad = "0.32.0"
 test-case = "3.3.1"
 textwrap = "0.16.2"
 thiserror = "2.0.12"
@@ -124,6 +125,7 @@ winreg = "0.52"
 jj-lib = { path = "lib", version = "0.29.0", default-features = false }
 jj-lib-proc-macros = { path = "lib/proc-macros", version = "0.29.0" }
 testutils = { path = "lib/testutils" }
+jj-cli = { path = "cli", default-features = false }
 
 [workspace.lints.clippy]
 explicit_iter_loop = "warn"
