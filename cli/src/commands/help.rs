@@ -20,6 +20,7 @@ use clap::builder::StyledStr;
 use clap::error::ContextKind;
 use crossterm::style::Stylize as _;
 use itertools::Itertools as _;
+use termimad::crossterm::style::Color::Yellow;
 use tracing::instrument;
 
 use crate::cli_util::CommandHelper;
@@ -55,8 +56,10 @@ pub(crate) fn cmd_help(
     if let Some(name) = &args.keyword {
         let keyword = find_keyword(name).expect("clap should check this with `value_parser`");
         ui.request_pager();
-        write!(ui.stdout(), "{}", keyword.content)?;
-
+        let mut skin = termimad::MadSkin::default();
+        skin.bold.set_fg(Yellow);
+        let content = keyword.content;
+        writeln!(ui.stdout(), "{}", skin.term_text(content))?;
         return Ok(());
     }
 
