@@ -20,6 +20,11 @@ use clap::builder::StyledStr;
 use clap::error::ContextKind;
 use crossterm::style::Stylize as _;
 use itertools::Itertools as _;
+use syntect::easy::HighlightLines;
+use syntect::highlighting::ThemeSet;
+use syntect::parsing::SyntaxSet;
+use syntect::util::as_24_bit_terminal_escaped;
+use syntect::util::LinesWithEndings;
 use termimad::crossterm::style::Color::Yellow;
 use tracing::instrument;
 
@@ -56,10 +61,22 @@ pub(crate) fn cmd_help(
     if let Some(name) = &args.keyword {
         let keyword = find_keyword(name).expect("clap should check this with `value_parser`");
         ui.request_pager();
+
+        let ps = SyntaxSet::load_defaults_newlines();
+        let ts = ThemeSet::load_defaults();
+
+        let syntax = ps.find_syntax_by_extension("rs").unwrap();
+        let mut h = HighlightLines::new(syntax, &ts.themes["base16-ocean.dark"]);
+
         let mut skin = termimad::MadSkin::default();
         skin.bold.set_fg(Yellow);
+
         let content = keyword.content;
-        writeln!(ui.stdout(), "{}", skin.term_text(content))?;
+        for line in LinesWithEndings::from(content) {
+            let ranges: Vec<_> = h.highlight_line(line, &ps).unwrap();
+            let escaped = as_24_bit_terminal_escaped(ranges.as_slice(), true);
+            write!(ui.stdout(), "{}", skin.term_text(&escaped))?;
+        }
         return Ok(());
     }
 
