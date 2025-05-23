@@ -518,6 +518,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "convert_case"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bb402b8d4c85569410425650ce3eddc7d698ed96d39a73f941b08fb63082f1e7"
+dependencies = [
+ "unicode-segmentation",
+]
+
+[[package]]
+name = "coolor"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "980c2afde4af43d6a05c5be738f9eae595cff86dce1f38f88b95058a98c027f3"
+dependencies = [
+ "crossterm 0.29.0",
+]
+
+[[package]]
 name = "core-foundation-sys"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -578,6 +596,45 @@ dependencies = [
 ]
 
 [[package]]
+name = "crokey"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5282b45c96c5978c8723ea83385cb9a488b64b7d175733f48d07bf9da514a863"
+dependencies = [
+ "crokey-proc_macros",
+ "crossterm 0.29.0",
+ "once_cell",
+ "serde",
+ "strict",
+]
+
+[[package]]
+name = "crokey-proc_macros"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2ea0218d3fedf0797fa55676f1964ef5d27103d41ed0281b4bbd2a6e6c3d8d28"
+dependencies = [
+ "crossterm 0.29.0",
+ "proc-macro2",
+ "quote",
+ "strict",
+ "syn 2.0.101",
+]
+
+[[package]]
+name = "crossbeam"
+version = "0.8.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1137cd7e7fc0fb5d3c5a8678be38ec56e819125d8d7907411fe24ccb943faca8"
+dependencies = [
+ "crossbeam-channel",
+ "crossbeam-deque",
+ "crossbeam-epoch",
+ "crossbeam-queue",
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "crossbeam-channel"
 version = "0.5.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -606,6 +663,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbeam-queue"
+version = "0.3.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f58bbc28f91df819d0aa2a2c00cd19754769c2fad90579b3592b1c9ba7a3115"
+dependencies = [
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.8.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -622,6 +688,24 @@ dependencies = [
  "mio",
  "parking_lot",
  "rustix 0.38.44",
+ "signal-hook",
+ "signal-hook-mio",
+ "winapi",
+]
+
+[[package]]
+name = "crossterm"
+version = "0.29.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d8b9f2e4c67f833b660cdb0a3523065869fb35570177239812ed4c905aeff87b"
+dependencies = [
+ "bitflags 2.9.0",
+ "crossterm_winapi",
+ "derive_more",
+ "document-features",
+ "mio",
+ "parking_lot",
+ "rustix 1.0.7",
  "signal-hook",
  "signal-hook-mio",
  "winapi",
@@ -730,6 +814,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5729f5117e208430e437df2f4843f5e5952997175992d1414f94c57d61e270b4"
 
 [[package]]
+name = "derive_more"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "093242cf7570c207c83073cf82f79706fe7b8317e98620a47d5be7c3d8497678"
+dependencies = [
+ "derive_more-impl",
+]
+
+[[package]]
+name = "derive_more-impl"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bda628edc44c4bb645fbe0f758797143e4e07926f7ebf4e9bdfbd3d2ce621df3"
+dependencies = [
+ "convert_case",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.101",
+]
+
+[[package]]
 name = "diff"
 version = "0.1.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -789,6 +894,15 @@ name = "doc-comment"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fea41bba32d969b513997752735605054bc0dfa92b4c56bf1189f2e174be7a10"
+
+[[package]]
+name = "document-features"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "95249b50c6c185bee49034bcb378a49dc2b5dff0be90ff6616d31d64febab05d"
+dependencies = [
+ "litrs",
+]
 
 [[package]]
 name = "dunce"
@@ -2346,7 +2460,7 @@ dependencies = [
  "clap_complete_nushell",
  "clap_mangen",
  "criterion",
- "crossterm",
+ "crossterm 0.28.1",
  "datatest-stable",
  "dunce",
  "erased-serde",
@@ -2380,6 +2494,7 @@ dependencies = [
  "slab",
  "strsim",
  "tempfile",
+ "termimad",
  "test-case",
  "testutils",
  "textwrap",
@@ -2488,6 +2603,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf36173d4167ed999940f804952e6b08197cae5ad5d572eb4db150ce8ad5d58f"
 
 [[package]]
+name = "lazy-regex"
+version = "3.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60c7310b93682b36b98fa7ea4de998d3463ccbebd94d935d6b48ba5b6ffa7126"
+dependencies = [
+ "lazy-regex-proc_macros",
+ "once_cell",
+ "regex",
+]
+
+[[package]]
+name = "lazy-regex-proc_macros"
+version = "3.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ba01db5ef81e17eb10a5e0f2109d1b3a3e29bac3070fdbd7d156bf7dbd206a1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "regex",
+ "syn 2.0.101",
+]
+
+[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2548,6 +2686,12 @@ name = "litemap"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "241eaef5fd12c88705a01fc1066c48c4b36e0dd4377dcdc7ec3942cea7a69956"
+
+[[package]]
+name = "litrs"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b4ce301924b7887e9d637144fdade93f9dfff9b60981d4ac161db09720d39aa5"
 
 [[package]]
 name = "lock_api"
@@ -2681,6 +2825,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "minimad"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a9c5d708226d186590a7b6d4a9780e2bdda5f689e0d58cd17012a298efd745d2"
+dependencies = [
+ "once_cell",
 ]
 
 [[package]]
@@ -3297,7 +3450,7 @@ dependencies = [
  "bitflags 2.9.1",
  "cassowary",
  "compact_str",
- "crossterm",
+ "crossterm 0.28.1",
  "indoc",
  "instability",
  "itertools 0.13.0",
@@ -3557,7 +3710,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3262a6cee1ea1663753e7178459c37bd2c5af37ad3371dbefd44607470c6d297"
 dependencies = [
  "cassowary",
- "crossterm",
+ "crossterm 0.28.1",
  "num-traits",
  "ratatui",
  "serde",
@@ -3782,6 +3935,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
+name = "strict"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f42444fea5b87a39db4218d9422087e66a85d0e7a0963a439b07bcdf91804006"
+
+[[package]]
 name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3859,6 +4018,22 @@ dependencies = [
  "once_cell",
  "rustix 1.0.8",
  "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "termimad"
+version = "0.32.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7c6be8b522caa5efccf3212424ec550b57b2937206d8eefe16074fedcac50de1"
+dependencies = [
+ "coolor",
+ "crokey",
+ "crossbeam",
+ "lazy-regex",
+ "minimad",
+ "serde",
+ "thiserror 2.0.12",
+ "unicode-width 0.1.12",
 ]
 
 [[package]]
