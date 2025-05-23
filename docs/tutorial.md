@@ -21,7 +21,7 @@ If you haven't already, make sure you
 
 Let's start by cloning GitHub's Hello-World repo using `jj`:
 
-```shell
+```console
 # Note the "git" before "clone" (there is no support for cloning native jj
 # repos yet)
 $ jj git clone https://github.com/octocat/Hello-World
@@ -520,8 +520,11 @@ to specify a path to an executable if it is not in the PATH.
 If we look at the diff of the second commit, we now see that all three lines got
 capitalized:
 
-```shell
+```console
 $ jj diff -r @- --git
+```
+
+```diff
 diff --git a/file b/file
 index de980441c3..b1e67221af 100644
 --- a/file
@@ -544,7 +547,7 @@ Let's try one final command for changing the contents of an existing commit. Tha
 command is `jj diffedit`, which lets you edit the changes in a commit without
 checking it out.
 
-```shell
+```console
 $ jj diffedit -r @-
 Hint: Using default editor ':builtin'; run `jj config set --user ui.diff-editor :builtin` to disable this message.
 Rebased 1 descendant commits
