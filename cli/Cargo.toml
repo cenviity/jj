@@ -99,6 +99,7 @@ serde_json = { workspace = true }
 shlex = { workspace = true }
 slab = { workspace = true }
 tempfile = { workspace = true }
+termimad = { workspace = true }
 textwrap = { workspace = true }
 thiserror = { workspace = true }
 timeago = { workspace = true }
@@ -126,7 +127,7 @@ proptest-state-machine = { workspace = true }
 test-case = { workspace = true }
 testutils = { workspace = true }
 # https://github.com/rust-lang/cargo/issues/2911#issuecomment-1483256987
-jj-cli = { path = ".", features = ["test-fakes"], default-features = false }
+jj-cli = { workspace = true, features = ["test-fakes"] }
 
 [features]
 default = ["watchman", "git"]
