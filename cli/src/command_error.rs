@@ -59,6 +59,7 @@ use jj_lib::working_copy::ResetError;
 use jj_lib::working_copy::SnapshotError;
 use jj_lib::working_copy::WorkingCopyStateError;
 use jj_lib::workspace::WorkspaceInitError;
+use pygmentize::PygmentizeError;
 use thiserror::Error;
 
 use crate::cli_util::short_operation_hash;
@@ -730,6 +731,21 @@ impl From<FixError> for CommandError {
                 "An error occurred while attempting to fix file content",
                 err,
             ),
+        }
+    }
+}
+
+impl From<PygmentizeError> for CommandError {
+    fn from(err: PygmentizeError) -> Self {
+        match err {
+            PygmentizeError::Process(err) => err.into(),
+            PygmentizeError::NotFound(err) => err.into(),
+            PygmentizeError::InvalidUtf8(err) => {
+                internal_error_with_message("Input is not valid UTF-8", err)
+            }
+            PygmentizeError::Pygmentize(_exit_status, msg) => {
+                internal_error_with_message(msg, msg.into())
+            }
         }
     }
 }
