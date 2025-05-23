@@ -104,6 +104,7 @@ smallvec = { version = "1.15.1", features = [
 ] }
 strsim = "0.11.1"
 syn = "2.0.111"
+syntect = "5.2.0"
 rustversion = "1.0.22"
 tempfile = "3.24.0"
 termimad = "0.32.0"
