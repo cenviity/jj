@@ -766,14 +766,14 @@ Our builtin pager is based on
 The built-in pager supports both navigation via arrows and Vim-style navigation.
 Beyond that, here are some useful keybindings for the pager:
 
-| Key             | Action                |
-| :-------------- | :-------------------- |
-| `Ctrl-c` or `q` | Quit                  |
-| `h` or `F1`     | Show all key bindings |
-| `Esc`           | Close help or prompt  |
-| `\`             | Toggle line wrapping  |
-| `#`             | Toggle line numbers   |
-| `Ctrl-r`        | Toggle the ruler      |
+| Key                 | Action                |
+| :------------------ | :-------------------- |
+| ++ctrl+c++ or ++q++ | Quit                  |
+| ++h++ or ++f1++     | Show all key bindings |
+| ++esc++             | Close help or prompt  |
+| ++backslash++       | Toggle line wrapping  |
+| ++"#"++             | Toggle line numbers   |
+| ++ctrl+r++          | Toggle the ruler      |
 
 The built-in pager does not support mouse input.
 
