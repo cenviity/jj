@@ -73,9 +73,10 @@ pub(crate) fn cmd_help(
 
         let content = keyword.content;
         for line in LinesWithEndings::from(content) {
-            let ranges: Vec<_> = h.highlight_line(line, &ps).unwrap();
+            let ranges = h.highlight_line(line, &ps).unwrap();
             let escaped = as_24_bit_terminal_escaped(ranges.as_slice(), true);
-            write!(ui.stdout(), "{}", skin.term_text(&escaped))?;
+            // write!(ui.stdout(), "{}", skin.term_text(&escaped))?;
+            write!(ui.stdout(), "{escaped}")?;
         }
         return Ok(());
     }
