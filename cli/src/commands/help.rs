@@ -20,6 +20,7 @@ use clap::builder::StyledStr;
 use clap::error::ContextKind;
 use crossterm::style::Stylize as _;
 use itertools::Itertools as _;
+use pygmentize::TerminalTrueColorFormatter;
 use tracing::instrument;
 
 use crate::cli_util::CommandHelper;
@@ -55,7 +56,12 @@ pub(crate) fn cmd_help(
     if let Some(name) = &args.keyword {
         let keyword = find_keyword(name).expect("clap should check this with `value_parser`");
         ui.request_pager();
-        write!(ui.stdout(), "{}", keyword.content)?;
+        let content = pygmentize::highlight(
+            keyword.content,
+            Some("markdown"),
+            &TerminalTrueColorFormatter::default(),
+        )?;
+        write!(ui.stdout(), "{content}")?;
 
         return Ok(());
     }

@@ -63,6 +63,7 @@ use jj_lib::working_copy::SnapshotError;
 use jj_lib::working_copy::WorkingCopyStateError;
 use jj_lib::workspace::WorkspaceInitError;
 use jj_lib::workspace_store::WorkspaceStoreError;
+use pygmentize::PygmentizeError;
 use thiserror::Error;
 
 use crate::cli_util::short_operation_hash;
@@ -765,6 +766,21 @@ impl From<BisectionError> for CommandError {
 impl From<SecureConfigError> for CommandError {
     fn from(err: SecureConfigError) -> Self {
         internal_error_with_message("Failed to determine the secure config for a repo", err)
+    }
+}
+
+impl From<PygmentizeError> for CommandError {
+    fn from(err: PygmentizeError) -> Self {
+        match err {
+            PygmentizeError::Process(err) => err.into(),
+            PygmentizeError::NotFound(err) => err.into(),
+            PygmentizeError::InvalidUtf8(err) => {
+                internal_error_with_message("Input is not valid UTF-8", err)
+            }
+            PygmentizeError::Pygmentize(_exit_status, msg) => {
+                internal_error_with_message(msg, msg.into())
+            }
+        }
     }
 }
 
