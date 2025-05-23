@@ -2452,6 +2452,7 @@ dependencies = [
  "pest",
  "pest_derive",
  "pollster",
+ "pygmentize",
  "rayon",
  "regex",
  "rpassword",
@@ -3241,6 +3242,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52c2c1bf36ddb1a1c396b3601a3cec27c2462e45f07c386894ec3ccf5332bd16"
 dependencies = [
  "prost",
+]
+
+[[package]]
+name = "pygmentize"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee7d15fa1e045a1c43cec886ec58bd58e845176654119930d3642d84be69b453"
+dependencies = [
+ "winapi-util",
 ]
 
 [[package]]
