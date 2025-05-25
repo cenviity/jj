@@ -2255,10 +2255,11 @@ to the current parents may contain changes from multiple commits.
                 .map(|commits| commits.len())
                 .sum();
             writeln!(fmt, "New conflicts appeared in {num_conflicted} commits:")?;
-            print_updated_commits(
+            print_updated_commits_inner(
                 fmt.as_mut(),
                 &self.commit_summary_template(),
                 new_conflicts_by_change_id.values().flatten().copied(),
+                true,
             )?;
         }
 
@@ -2731,14 +2732,28 @@ pub fn print_updated_commits<'a>(
     template: &TemplateRenderer<Commit>,
     commits: impl IntoIterator<Item = &'a Commit>,
 ) -> io::Result<()> {
-    let mut commits = commits.into_iter().fuse();
+    print_updated_commits_inner(formatter, template, commits, false)
+}
+
+fn print_updated_commits_inner<'a>(
+    formatter: &mut dyn Formatter,
+    template: &TemplateRenderer<Commit>,
+    commits: impl IntoIterator<Item = &'a Commit>,
+    include_last_commit: bool,
+) -> io::Result<()> {
+    let mut commits = commits.into_iter().fuse().peekable();
     for commit in commits.by_ref().take(10) {
         write!(formatter, "  ")?;
         template.format(commit, formatter)?;
         writeln!(formatter)?;
     }
-    if commits.next().is_some() {
+    if commits.peek().is_some() {
         writeln!(formatter, "  ...")?;
+        if include_last_commit {
+            write!(formatter, "  ")?;
+            template.format(commits.last().unwrap(), formatter)?;
+            writeln!(formatter)?;
+        }
     }
     Ok(())
 }
