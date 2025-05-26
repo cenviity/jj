@@ -2742,11 +2742,15 @@ fn print_updated_commits_inner<'a>(
     include_last_commit: bool,
 ) -> io::Result<()> {
     let mut commits = commits.into_iter().fuse().peekable();
-    for commit in commits.by_ref().take(10) {
+    for commit in commits.by_ref().take(9) {
         write!(formatter, "  ")?;
         template.format(commit, formatter)?;
         writeln!(formatter)?;
     }
+    // match commits.next_array() {
+    //     Some(_) => todo!(),
+    //     None => todo!(),
+    // }
     if commits.peek().is_some() {
         writeln!(formatter, "  ...")?;
         if include_last_commit {
