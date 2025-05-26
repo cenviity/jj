@@ -218,16 +218,16 @@ fn test_report_conflicts_with_resolving_conflicts_hint_disabled() {
     test_env.run_jj_in(".", ["git", "init", "repo"]).success();
     let work_dir = test_env.work_dir("repo");
 
-    work_dir.write_file("file", "A\n");
-    work_dir.run_jj(["commit", "-m=A"]).success();
-    work_dir.write_file("file", "B\n");
-    work_dir.run_jj(["commit", "-m=B"]).success();
-    work_dir.write_file("file", "C\n");
-    work_dir.run_jj(["commit", "-m=C"]).success();
+    work_dir.write_file("file", "1\n");
+    work_dir.run_jj(["commit", "-m=1"]).success();
+    work_dir.write_file("file", "2\n");
+    work_dir.run_jj(["commit", "-m=2"]).success();
+    work_dir.write_file("file", "3\n");
+    work_dir.run_jj(["commit", "-m=3"]).success();
 
     let output = work_dir.run_jj([
         "rebase",
-        "-s=subject(B)",
+        "-s=subject(2)",
         "-d=root()",
         "--config=hints.resolving-conflicts=false",
     ]);
@@ -235,13 +235,47 @@ fn test_report_conflicts_with_resolving_conflicts_hint_disabled() {
     ------- stderr -------
     Rebased 3 commits to destination
     Working copy  (@) now at: zsuskuln 0798f940 (conflict) (empty) (no description set)
-    Parent commit (@-)      : kkmpptxz f18bc634 (conflict) C
+    Parent commit (@-)      : kkmpptxz f18bc634 (conflict) 3
     Added 0 files, modified 1 files, removed 0 files
     Warning: There are unresolved conflicts at these paths:
     file    2-sided conflict including 1 deletion
     New conflicts appeared in 2 commits:
-      kkmpptxz f18bc634 (conflict) C
-      rlvkpnrz 3ec72c59 (conflict) B
+      kkmpptxz f18bc634 (conflict) 3
+      rlvkpnrz 3ec72c59 (conflict) 2
     [EOF]
     ");
+
+    work_dir.run_jj(["undo"]).success();
+    for i in 4..=11 {
+        work_dir.write_file("file", format!("{i}\n"));
+        work_dir.run_jj(["commit", &format!("-m={i}")]).success();
+    }
+    let output = work_dir.run_jj([
+        "rebase",
+        r#"-s=description(exact:"2\n")"#,
+        "-d=root()",
+        "--config=hints.resolving-conflicts=false",
+    ]);
+    insta::assert_snapshot!(output, @r###"
+    ------- stderr -------
+    Rebased 11 commits to destination
+    Working copy  (@) now at: lylxulpl e4f38ed6 (conflict) (empty) (no description set)
+    Parent commit (@-)      : wqnwkozp 34098018 (conflict) 11
+    Added 0 files, modified 1 files, removed 0 files
+    Warning: There are unresolved conflicts at these paths:
+    file    2-sided conflict including 1 deletion
+    New conflicts appeared in 10 commits:
+      wqnwkozp 34098018 (conflict) 11
+      kmkuslsw 969e37d9 (conflict) 10
+      kpqxywon c7eff9cf (conflict) 9
+      znkkpsqq 2f398fd6 (conflict) 8
+      yostqsxw 33b6e63d (conflict) 7
+      vruxwmqv feb4ad89 (conflict) 6
+      yqosqzyt e496582f (conflict) 5
+      zsuskuln 6067ddb5 (conflict) 4
+      kkmpptxz be55a6e1 (conflict) 3
+      ...
+      rlvkpnrz 7d8de731 (conflict) 2
+    [EOF]
+    "###);
 }
