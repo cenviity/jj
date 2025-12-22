@@ -1194,7 +1194,9 @@ Start tracking specified paths in the working copy
 
 Without arguments, all paths that are not ignored will be tracked.
 
-By default, new files in the working copy are automatically tracked, so this command has no effect. You can configure which paths to automatically track by setting `snapshot.auto-track` (e.g. to `"none()"` or `"glob:**/*.rs"`). Files that don't match the pattern can be manually tracked using this command. The default pattern is `all()`.
+By default, new files in the working copy are automatically tracked, so this command has no effect.
+
+You can configure which paths to automatically track by setting `snapshot.auto-track` (e.g. to `"none()"` or `"glob:**/*.rs"`). Files that don't match the pattern can be manually tracked using this command. The default pattern is `all()`.
 
 **Usage:** `jj file track [OPTIONS] <FILESETS>...`
 
