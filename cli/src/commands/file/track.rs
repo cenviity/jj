@@ -34,6 +34,7 @@ use crate::ui::Ui;
 ///
 /// By default, new files in the working copy are automatically tracked, so
 /// this command has no effect.
+///
 /// You can configure which paths to automatically track by setting
 /// `snapshot.auto-track` (e.g. to `"none()"` or `"glob:**/*.rs"`). Files that
 /// don't match the pattern can be manually tracked using this command. The
