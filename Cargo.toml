@@ -34,11 +34,11 @@ clap = { version = "4.6.0", features = [
     "wrap_help",
     "string",
 ] }
-clap_complete = { version = "4.6.0", features = ["unstable-dynamic"] }
-clap_complete_nushell = "4.6.0"
 # Update clap-markdown manually since test_generate_md_cli_help snapshot
 # will need regenerating.
 clap-markdown = "=0.1.5"
+clap_complete = { version = "4.6.0", features = ["unstable-dynamic"] }
+clap_complete_nushell = "4.6.0"
 clap_mangen = "0.3.0"
 clru = "0.6.3"
 criterion = "0.8.2"
@@ -48,8 +48,8 @@ digest = "0.10.7"
 dunce = "1.0.5"
 either = "1.15.0"
 erased-serde = "0.4.10"
-eyre = "0.6"
 etcetera = "0.11.0"
+eyre = "0.6"
 futures = "0.3.32"
 gix = { version = "0.81.0", default-features = false, features = [
     "attributes",
@@ -92,6 +92,7 @@ ref-cast = "1.0.25"
 regex = "1.12.3"
 rpassword = "7.4.0"
 rustix = { version = "1.1.4", features = ["fs"] }
+rustversion = "1.0.22"
 same-file = "1.0.6"
 sapling-renderdag = "0.1.0"
 sapling-streampager = "0.12.0"
@@ -108,7 +109,6 @@ smallvec = { version = "1.15.1", features = [
 ] }
 strsim = "0.11.1"
 syn = "2.0.111"
-rustversion = "1.0.22"
 tempfile = "3.27.0"
 test-case = "3.3.1"
 textwrap = "0.16.2"
@@ -129,7 +129,6 @@ unicode-width = "0.2.2"
 watchman_client = "0.9.0"
 whoami = "2.1.1"
 winreg = "0.56"
-
 # put all inter-workspace libraries, i.e. those that use 'path = ...' here in
 # their own (alphabetically sorted) block
 
