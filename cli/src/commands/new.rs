@@ -51,7 +51,7 @@ pub(crate) struct NewArgs {
     /// Parent(s) of the new change [default: @] [aliases: -o, -r]
     #[arg(group = "revisions", value_name = "REVSETS")]
     #[arg(add = ArgValueCompleter::new(complete::revset_expression_all))]
-    revisions_pos: Option<Vec<RevisionArg>>,
+    revisions_pos: Vec<RevisionArg>,
 
     #[arg(
         short = 'o',
@@ -62,7 +62,7 @@ pub(crate) struct NewArgs {
 
     )]
     #[arg(add = ArgValueCompleter::new(complete::revset_expression_all))]
-    revisions_opt: Option<Vec<RevisionArg>>,
+    revisions_opt: Vec<RevisionArg>,
 
     /// The change description to use
     #[arg(long = "message", short, value_name = "MESSAGE")]
@@ -132,7 +132,7 @@ pub(crate) struct NewArgs {
     /// Example: `jj new --insert-after A --insert-before D`:
     ///
     /// ```text
-    /// 
+    ///
     ///     D            D
     ///     |           / \
     ///     C          |   C
@@ -164,11 +164,11 @@ pub(crate) fn cmd_new(
 ) -> Result<(), CommandError> {
     let mut workspace_command = command.workspace_helper(ui)?;
 
-    let revision_args = match (&args.revisions_pos, &args.revisions_opt) {
-        (None, None) => (args.insert_before.is_none() && args.insert_after.is_none())
+    let revision_args = match (args.revisions_pos.as_slice(), args.revisions_opt.as_slice()) {
+        ([], []) => (args.insert_before.is_none() && args.insert_after.is_none())
             .then(|| vec![RevisionArg::AT]),
-        (None, Some(args)) | (Some(args), None) => Some(args.clone()),
-        (Some(pos), Some(opt)) => Some(merge_args_with(
+        ([], args) | (args, []) => Some(args.to_owned()),
+        (pos, opt) => Some(merge_args_with(
             command.matches().subcommand_matches("new").unwrap(),
             &[("revisions_pos", pos), ("revisions_opt", opt)],
             |_id, value| value.clone(),
