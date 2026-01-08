@@ -56,11 +56,11 @@ pub(crate) struct DuplicateArgs {
     /// The revision(s) to duplicate (default: @) [aliases: -r]
     #[arg(value_name = "REVSETS")]
     #[arg(add = ArgValueCompleter::new(complete::revset_expression_all))]
-    revisions_pos: Vec<RevisionArg>,
+    revisions_pos: Option<Vec<RevisionArg>>,
 
     #[arg(short = 'r', hide = true, value_name = "REVSETS")]
     #[arg(add = ArgValueCompleter::new(complete::revset_expression_all))]
-    revisions_opt: Vec<RevisionArg>,
+    revisions_opt: Option<Vec<RevisionArg>>,
 
     /// The revision(s) to duplicate onto (can be repeated to create a merge
     /// commit)
@@ -106,13 +106,16 @@ pub(crate) fn cmd_duplicate(
     args: &DuplicateArgs,
 ) -> Result<(), CommandError> {
     let mut workspace_command = command.workspace_helper(ui)?;
-    let to_duplicate: Vec<CommitId> =
-        if !args.revisions_pos.is_empty() || !args.revisions_opt.is_empty() {
-            workspace_command
-                .parse_union_revsets(ui, &[&*args.revisions_pos, &*args.revisions_opt].concat())?
-        } else {
-            workspace_command.parse_revset(ui, &RevisionArg::AT)?
+    let revset_to_duplicate = match (&args.revisions_pos, &args.revisions_opt) {
+        (None, None) => workspace_command.parse_revset(ui, &RevisionArg::AT)?,
+        (None, Some(args)) | (Some(args), None) => {
+            workspace_command.parse_union_revsets(ui, args)?
         }
+        (Some(pos), Some(opt)) => {
+            workspace_command.parse_union_revsets(ui, &[pos.clone(), opt.clone()].concat())?
+        }
+    };
+    let to_duplicate: Vec<CommitId> = revset_to_duplicate
         .evaluate_to_commit_ids()?
         .try_collect()?; // in reverse topological order
     if to_duplicate.is_empty() {
