@@ -35,6 +35,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * The revset functions `author_date()` and `committer_date()` have been renamed to
   `author_timestamp()` and `committer_timestamp()`.
 
+* The `ui.bookmark-list-sort-keys` and `ui.tag-list-sort-keys` settings now
+  accept the values `author-timestamp` and `committer-timestamp` instead of
+  `author-date` and `committer-date`.
+
 ### New features
 
 * `jj git fetch` now shows details of abandoned commits (change IDs and

@@ -243,10 +243,10 @@ tag-list-sort-keys = ["name"]
 ```
 
 The configuration works identically to using the `--sort` option. The following
-sort keys are supported: `name`, `author-name`, `author-email`, `author-date`,
-`committer-name`, `committer-email`, `committer-date`. Suffix the key with `-`
-to sort in descending order. Multiple keys can be supplied here, the first key
-is the most significant.
+sort keys are supported: `name`, `author-name`, `author-email`,
+`author-timestamp`, `committer-name`, `committer-email`, `committer-timestamp`.
+Suffix the key with `-` to sort in descending order. Multiple keys can be
+supplied here, the first key is the most significant.
 
 When the `--sort` option is used, the configuration is ignored.
 

@@ -478,7 +478,7 @@ See [`jj help -k bookmarks`] for more information.
 
    This defaults to the `ui.bookmark-list-sort-keys` setting.
 
-  Possible values: `name`, `name-`, `author-name`, `author-name-`, `author-email`, `author-email-`, `author-date`, `author-date-`, `committer-name`, `committer-name-`, `committer-email`, `committer-email-`, `committer-date`, `committer-date-`
+  Possible values: `name`, `name-`, `author-name`, `author-name-`, `author-email`, `author-email-`, `author-timestamp`, `author-timestamp-`, `author-date`, `author-date-`, `committer-name`, `committer-name-`, `committer-email`, `committer-email-`, `committer-timestamp`, `committer-timestamp-`, `committer-date`, `committer-date-`
 
 
 
@@ -3158,7 +3158,7 @@ By default, a tracked remote tag will be included only if its target is differen
 
    This defaults to the `ui.tag-list-sort-keys` setting.
 
-  Possible values: `name`, `name-`, `author-name`, `author-name-`, `author-email`, `author-email-`, `author-date`, `author-date-`, `committer-name`, `committer-name-`, `committer-email`, `committer-email-`, `committer-date`, `committer-date-`
+  Possible values: `name`, `name-`, `author-name`, `author-name-`, `author-email`, `author-email-`, `author-timestamp`, `author-timestamp-`, `author-date`, `author-date-`, `committer-name`, `committer-name-`, `committer-email`, `committer-email-`, `committer-timestamp`, `committer-timestamp-`, `committer-date`, `committer-date-`
 
 
 

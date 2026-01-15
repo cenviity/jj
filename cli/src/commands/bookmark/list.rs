@@ -171,6 +171,29 @@ pub fn cmd_bookmark_list(
         (None, None) => StringExpression::all(),
     };
 
+    let sort_keys = if args.sort.is_empty() {
+        workspace_command.settings().get_value_with(
+            "ui.bookmark-list-sort-keys",
+            commit_ref_list::parse_sort_keys,
+        )?
+    } else {
+        args.sort.clone()
+    };
+    if sort_keys.contains(&SortKey::AuthorDate) || sort_keys.contains(&SortKey::AuthorDateDesc) {
+        writeln!(
+            ui.warning_default(),
+            "The sort key `author-date` is deprecated. Use `author-timestamp` instead."
+        )?;
+    }
+    if sort_keys.contains(&SortKey::CommitterDate)
+        || sort_keys.contains(&SortKey::CommitterDateDesc)
+    {
+        writeln!(
+            ui.warning_default(),
+            "The sort key `committer-date` is deprecated. Use `committer-timestamp` instead."
+        )?;
+    }
+
     let predicates = RefFilterPredicates {
         name_matcher: name_expr.to_matcher(),
         remote_matcher: remote_expr.to_matcher(),
@@ -180,20 +203,12 @@ pub fn cmd_bookmark_list(
         include_synced_remotes: args.tracked || args.all_remotes || args.remotes.is_some(),
         include_untracked_remotes: !args.tracked && (args.all_remotes || args.remotes.is_some()),
     };
-    let mut bookmark_list_items = commit_ref_list::collect_items(view.bookmarks(), &predicates);
-    let sort_keys = if args.sort.is_empty() {
-        workspace_command.settings().get_value_with(
-            "ui.bookmark-list-sort-keys",
-            commit_ref_list::parse_sort_keys,
-        )?
-    } else {
-        args.sort.clone()
-    };
-    commit_ref_list::sort(repo.store(), &mut bookmark_list_items, &sort_keys)?;
+    let mut list_items = commit_ref_list::collect_items(view.bookmarks(), &predicates);
+    commit_ref_list::sort(repo.store(), &mut list_items, &sort_keys)?;
 
     ui.request_pager();
     let mut formatter = ui.stdout_formatter();
-    bookmark_list_items
+    list_items
         .iter()
         .flat_map(|item| itertools::chain([&item.primary], &item.tracked))
         .try_for_each(|commit_ref| template.format(commit_ref, formatter.as_mut()))?;
@@ -201,7 +216,7 @@ pub fn cmd_bookmark_list(
 
     warn_unmatched_local_or_remote_bookmarks(ui, view, &name_expr)?;
 
-    if bookmark_list_items
+    if list_items
         .iter()
         .any(|item| item.primary.is_local() && item.primary.has_conflict())
     {
@@ -215,7 +230,7 @@ pub fn cmd_bookmark_list(
     if jj_lib::git::get_git_backend(repo.store()).is_ok() {
         // Print only one of these hints. It's not important to mention unexported
         // bookmarks, but user might wonder why deleted bookmarks are still listed.
-        let deleted_tracking = bookmark_list_items
+        let deleted_tracking = list_items
             .iter()
             .filter(|item| item.primary.is_local() && item.primary.is_absent())
             .map(|item| {

@@ -154,7 +154,7 @@ fn test_bookmark_bad_name() {
     For more information, try '--help'.
     Caused by:  --> 1:1
       |
-    1 | 
+    1 |
       | ^---
       |
       = expected <identifier>, <string_literal>, or <raw_string_literal>
@@ -188,7 +188,7 @@ fn test_bookmark_bad_name() {
     For more information, try '--help'.
     Caused by:  --> 1:1
       |
-    1 | 
+    1 |
       | ^---
       |
       = expected <identifier>, <string_literal>, or <raw_string_literal>
@@ -2570,7 +2570,7 @@ fn test_bookmark_list_sort_unknown_key_error() {
     insta::assert_snapshot!(work_dir.run_jj(["bookmark", "list", "--sort", "date"]), @r"
     ------- stderr -------
     error: invalid value 'date' for '--sort <SORT_KEY>'
-      [possible values: name, name-, author-name, author-name-, author-email, author-email-, author-date, author-date-, committer-name, committer-name-, committer-email, committer-email-, committer-date, committer-date-]
+      [possible values: name, name-, author-name, author-name-, author-email, author-email-, author-timestamp, author-timestamp-, author-date, author-date-, committer-name, committer-name-, committer-email, committer-email-, committer-timestamp, committer-timestamp-, committer-date, committer-date-]
 
     For more information, try '--help'.
     [EOF]
@@ -2602,6 +2602,9 @@ fn test_bookmark_list_sort_multiple_keys() {
     b: alice@g.c
     a: bob@g.c
     c: bob@g.c
+    [EOF]
+    ------- stderr -------
+    Warning: The sort key `committer-date` is deprecated. Use `committer-timestamp` instead.
     [EOF]
     ");
 }
@@ -2636,6 +2639,9 @@ fn test_bookmark_list_sort_using_config() {
     a: bob@g.c
     c: bob@g.c
     [EOF]
+    ------- stderr -------
+    Warning: The sort key `author-date` is deprecated. Use `author-timestamp` instead.
+    [EOF]
     ");
 }
 
@@ -2659,7 +2665,7 @@ fn test_bookmark_list_sort_overriding_config() {
 
     let template = r#"name ++ ": " ++ if(normal_target, normal_target.author().email()) ++ "\n""#;
     insta::assert_snapshot!(work_dir.run_jj([
-        "--config=ui.bookmark-list-sort-keys=['author-email', 'author-date-']",
+        "--config=ui.bookmark-list-sort-keys=['author-email', 'author-timestamp-']",
         "bookmark",
         "list",
         "--sort=name-", // overriding config.
@@ -2844,7 +2850,7 @@ fn test_bad_auto_track_bookmarks() {
     Config error: Invalid `remotes.origin.auto-track-bookmarks`: Syntax error
     Caused by:  --> 1:1
       |
-    1 | 
+    1 |
       | ^---
       |
       = expected <expression>

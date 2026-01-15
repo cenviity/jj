@@ -162,11 +162,26 @@ pub fn cmd_tag_list(
             .parse_template(ui, &language, &text)?
             .labeled(["tag_list"])
     };
+
     let sort_keys = if args.sort.is_empty() {
         settings.get_value_with("ui.tag-list-sort-keys", commit_ref_list::parse_sort_keys)?
     } else {
         args.sort.clone()
     };
+    if sort_keys.contains(&SortKey::AuthorDate) || sort_keys.contains(&SortKey::AuthorDateDesc) {
+        writeln!(
+            ui.warning_default(),
+            "The sort key `author-date` is deprecated. Use `author-timestamp` instead."
+        )?;
+    }
+    if sort_keys.contains(&SortKey::CommitterDate)
+        || sort_keys.contains(&SortKey::CommitterDateDesc)
+    {
+        writeln!(
+            ui.warning_default(),
+            "The sort key `committer-date` is deprecated. Use `committer-timestamp` instead."
+        )?;
+    }
 
     let predicates = RefFilterPredicates {
         name_matcher: name_expr.to_matcher(),
