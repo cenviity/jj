@@ -227,7 +227,7 @@ fn test_metaedit() {
     [EOF]
     ");
 
-    // new author date
+    // new author timestamp
     work_dir.run_jj(["op", "restore", &setup_opid]).success();
     work_dir
         .run_jj([
