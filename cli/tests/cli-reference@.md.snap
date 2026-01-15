@@ -2125,7 +2125,7 @@ Whenever any metadata is updated, the committer name, email, and timestamp are a
    Use `jj describe` if you want to use an editor.
 * `--update-author-timestamp` — Update the author timestamp
 
-   This updates the author date to the current time, without modifying the author.
+   This updates the author timestamp to the current time, without modifying the author.
 * `--update-author` — Update the author to the configured user
 
    This updates the author name and email. The author timestamp is not modified – use --update-author-timestamp to update the author timestamp.
@@ -2135,12 +2135,12 @@ Whenever any metadata is updated, the committer name, email, and timestamp are a
    $ JJ_USER='Foo Bar' JJ_EMAIL=foo@bar.com jj metaedit --update-author
 * `--author <AUTHOR>` — Set author to the provided string
 
-   This changes author name and email while retaining author timestamp for non-discardable commits.
+  This changes author name and email while retaining author timestamp for non-discardable commits.
 
-   ```shell $ jj metaedit --author "Foo Bar <foo@bar.com>" ```
-* `--author-timestamp <AUTHOR_TIMESTAMP>` — Set the author date to the given date
+  ```shell $ jj metaedit --author "Foo Bar <foo@bar.com>" ```
+* `--author-timestamp <AUTHOR_TIMESTAMP>` — Set the author timestamp to the given timestamp
 
-   The date can either be human readable ([RFC2822], eg 'Sun, 23 Jan 2000 01:23:45 PST') or a time stamp ([RFC3339], eg '2000-01-23T01:23:45-08:00').
+   The date can either be human-readable ([RFC2822], e.g. 'Sun, 23 Jan 2000 01:23:45 PST') or a timestamp ([RFC3339], e.g. '2000-01-23T01:23:45-08:00').
 
    [RFC2822]: https://datatracker.ietf.org/doc/html/rfc2822
 
