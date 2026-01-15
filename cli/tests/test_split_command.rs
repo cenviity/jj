@@ -39,8 +39,8 @@ fn get_workspace_log_output(work_dir: &TestWorkDir) -> CommandOutput {
 }
 
 #[must_use]
-fn get_recorded_dates(work_dir: &TestWorkDir, revset: &str) -> CommandOutput {
-    let template = r#"separate("\n", "Author date:  " ++ author.timestamp(), "Committer date: " ++ committer.timestamp())"#;
+fn get_recorded_timestamps(work_dir: &TestWorkDir, revset: &str) -> CommandOutput {
+    let template = r#"separate("\n", "Author timestamp:  " ++ author.timestamp(), "Committer timestamp: " ++ committer.timestamp())"#;
     work_dir.run_jj(["log", "--no-graph", "-T", template, "-r", revset])
 }
 
@@ -60,9 +60,9 @@ fn test_split_by_paths() {
     ◆  zzzzzzzzzzzz true
     [EOF]
     ");
-    insta::assert_snapshot!(get_recorded_dates(&work_dir, "@"), @r"
-    Author date:  2001-02-03 04:05:08.000 +07:00
-    Committer date: 2001-02-03 04:05:08.000 +07:00[EOF]
+    insta::assert_snapshot!(get_recorded_timestamps(&work_dir, "@"), @r"
+    Author timestamp:  2001-02-03 04:05:08.000 +07:00
+    Committer timestamp: 2001-02-03 04:05:08.000 +07:00[EOF]
     ");
 
     std::fs::write(
@@ -99,15 +99,15 @@ fn test_split_by_paths() {
     [EOF]
     ");
 
-    // The author dates of the new commits should be inherited from the commit being
-    // split. The committer dates should be newer.
-    insta::assert_snapshot!(get_recorded_dates(&work_dir, "@"), @r"
-    Author date:  2001-02-03 04:05:08.000 +07:00
-    Committer date: 2001-02-03 04:05:10.000 +07:00[EOF]
+    // The author timestamps of the new commits should be inherited from the commit being
+    // split. The committer timestamps should be newer.
+    insta::assert_snapshot!(get_recorded_timestamps(&work_dir, "@"), @r"
+    Author timestamp:  2001-02-03 04:05:08.000 +07:00
+    Committer timestamp: 2001-02-03 04:05:10.000 +07:00[EOF]
     ");
-    insta::assert_snapshot!(get_recorded_dates(&work_dir, "@-"), @r"
-    Author date:  2001-02-03 04:05:08.000 +07:00
-    Committer date: 2001-02-03 04:05:10.000 +07:00[EOF]
+    insta::assert_snapshot!(get_recorded_timestamps(&work_dir, "@-"), @r"
+    Author timestamp:  2001-02-03 04:05:08.000 +07:00
+    Committer timestamp: 2001-02-03 04:05:10.000 +07:00[EOF]
     ");
 
     let output = work_dir.run_jj(["diff", "-s", "-r", "@-"]);

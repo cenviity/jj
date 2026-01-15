@@ -64,7 +64,7 @@ pub(crate) struct MetaeditArgs {
 
     /// Update the author timestamp
     ///
-    /// This updates the author date to the current time, without modifying the
+    /// This updates the author timestamp to the current time, without modifying the
     /// author.
     #[arg(long)]
     update_author_timestamp: bool,
@@ -93,11 +93,11 @@ pub(crate) struct MetaeditArgs {
     )]
     author: Option<(String, String)>,
 
-    /// Set the author date to the given date
+    /// Set the author timestamp to the given timestamp
     ///
-    /// The date can either be human readable
-    /// ([RFC2822], eg 'Sun, 23 Jan 2000 01:23:45 PST')
-    /// or a time stamp ([RFC3339], eg '2000-01-23T01:23:45-08:00').
+    /// The date can either be human-readable
+    /// ([RFC2822], e.g. 'Sun, 23 Jan 2000 01:23:45 PST')
+    /// or a timestamp ([RFC3339], e.g. '2000-01-23T01:23:45-08:00').
     ///
     /// [RFC2822]: https://datatracker.ietf.org/doc/html/rfc2822
     ///
@@ -216,8 +216,8 @@ pub(crate) fn cmd_metaedit(
                 if args.update_author_timestamp {
                     new_author.timestamp = commit_builder.committer().timestamp;
                 }
-                if let Some(author_date) = args.author_timestamp {
-                    new_author.timestamp = author_date;
+                if let Some(author_timestamp) = args.author_timestamp {
+                    new_author.timestamp = author_timestamp;
                 }
                 // If the old commit had an unset author, the commit builder
                 // may already have the author updated from the current config.
