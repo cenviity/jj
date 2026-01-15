@@ -419,7 +419,7 @@ fn test_function_name_hint() {
       | ^-----^
       |
       = Function `author_` doesn't exist
-    Hint: Did you mean `author`, `author_date`, `author_email`, `author_name`, `my_author`?
+    Hint: Did you mean `author`, `author_date`, `author_email`, `author_name`, `author_timestamp`, `my_author`?
     [EOF]
     [exit status: 1]
     ");
@@ -809,12 +809,47 @@ fn test_bad_alias_decl() {
     "#);
 }
 
-/// Verifies that the committer_date revset honors the local time zone.
+// TODO: Remove in jj 0.44+
+#[test]
+fn test_deprecated_author_and_committer_date() {
+    let test_env = TestEnvironment::default();
+    test_env.run_jj_in(".", ["git", "init", "repo"]).success();
+    let work_dir = test_env.work_dir("repo");
+
+    let output = work_dir.run_jj([
+        "log",
+        "-rauthor_date(after:2001-02-03) | author_timestamp(after:2001-02-03) | committer_date(after:2001-02-03) | committer_timestamp(after:2001-02-03)",
+    ]);
+    insta::assert_snapshot!(output, @"
+    @  qpvuntsm test.user@example.com 2001-02-03 08:05:07 e8849ae1
+    │  (empty) (no description set)
+    ~
+    [EOF]
+    ------- stderr -------
+    Warning: In revset expression
+     --> 1:1
+      |
+    1 | author_date(after:2001-02-03) | author_timestamp(after:2001-02-03) | committer_date(after:2001-02-03) | committer_timestamp(after:2001-02-03)
+      | ^---------^
+      |
+      = author_date() is deprecated; use author_timestamp() instead
+    Warning: In revset expression
+     --> 1:70
+      |
+    1 | author_date(after:2001-02-03) | author_timestamp(after:2001-02-03) | committer_date(after:2001-02-03) | committer_timestamp(after:2001-02-03)
+      |                                                                      ^------------^
+      |
+      = committer_date() is deprecated; use committer_timestamp() instead
+    [EOF]
+    ");
+}
+
+/// Verifies that the committer_timestamp revset honors the local time zone.
 /// This test cannot run on Windows because The TZ env var does not control
 /// chrono::Local on that platform.
 #[test]
 #[cfg(not(target_os = "windows"))]
-fn test_revset_committer_date_with_time_zone() {
+fn test_revset_committer_timestamp_with_time_zone() {
     // Use these for the test instead of tzdb identifiers like America/New_York
     // because the tz database may not be installed on some build servers
     const NEW_YORK: &str = "EST+5EDT+4,M3.1.0,M11.1.0";
@@ -850,7 +885,7 @@ fn test_revset_committer_date_with_time_zone() {
         ])
         .success();
 
-    let mut log_commits_before_and_after = |committer_date: &str, now: &str, tz: &str| {
+    let mut log_commits_before_and_after = |committer_timestamp: &str, now: &str, tz: &str| {
         test_env.add_env_var("TZ", tz);
         let config = format!("debug.commit-timestamp={now}");
         let work_dir = test_env.work_dir("repo");
@@ -862,7 +897,7 @@ fn test_revset_committer_date_with_time_zone() {
             "-T",
             "description.first_line() ++ ' ' ++ committer.timestamp() ++ '\n'",
             "-r",
-            format!("committer_date(before:'{committer_date}') ~ root()").as_str(),
+            format!("committer_timestamp(before:'{committer_timestamp}') ~ root()").as_str(),
         ]);
         let after_log = work_dir.run_jj([
             "--config",
@@ -872,7 +907,7 @@ fn test_revset_committer_date_with_time_zone() {
             "-T",
             "description.first_line() ++ ' ' ++ committer.timestamp() ++ '\n'",
             "-r",
-            format!("committer_date(after:'{committer_date}')").as_str(),
+            format!("committer_timestamp(after:'{committer_timestamp}')").as_str(),
         ]);
         (before_log, after_log)
     };

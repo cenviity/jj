@@ -32,6 +32,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * The revset function `diff_contains()` has been renamed to `diff_lines()`.
 
+* The revset functions `author_date()` and `committer_date()` have been renamed to
+  `author_timestamp()` and `committer_timestamp()`.
+
 ### New features
 
 * `jj git fetch` now shows details of abandoned commits (change IDs and
