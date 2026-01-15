@@ -997,13 +997,21 @@ static BUILTIN_FUNCTION_MAP: LazyLock<HashMap<&str, RevsetFunction>> = LazyLock:
         let predicate = RevsetFilterPredicate::AuthorEmail(expr);
         Ok(RevsetExpression::filter(predicate))
     });
-    map.insert("author_date", |diagnostics, function, context| {
+    map.insert("author_timestamp", |diagnostics, function, context| {
+        if function.name != "author_timestamp" {
+            // TODO: Remove in jj 0.44+
+            diagnostics.add_warning(RevsetParseError::expression(
+                "author_date() is deprecated; use author_timestamp() instead",
+                function.name_span,
+            ));
+        }
         let [arg] = function.expect_exact_arguments()?;
         let pattern = expect_date_pattern(diagnostics, arg, context.current_time())?;
-        Ok(RevsetExpression::filter(RevsetFilterPredicate::AuthorDate(
-            pattern,
-        )))
+        let predicate = RevsetFilterPredicate::AuthorTimestamp(pattern);
+        Ok(RevsetExpression::filter(predicate))
     });
+    // TODO: Remove author_date() in jj 0.44+
+    map.insert("author_date", map["author_timestamp"]);
     map.insert("signed", |_diagnostics, function, _context| {
         function.expect_no_arguments()?;
         let predicate = RevsetFilterPredicate::Signed;
@@ -1038,13 +1046,21 @@ static BUILTIN_FUNCTION_MAP: LazyLock<HashMap<&str, RevsetFunction>> = LazyLock:
         let predicate = RevsetFilterPredicate::CommitterEmail(expr);
         Ok(RevsetExpression::filter(predicate))
     });
-    map.insert("committer_date", |diagnostics, function, context| {
+    map.insert("committer_timestamp", |diagnostics, function, context| {
+        if function.name != "committer_timestamp" {
+            // TODO: Remove in jj 0.44+
+            diagnostics.add_warning(RevsetParseError::expression(
+                "committer_date() is deprecated; use committer_timestamp() instead",
+                function.name_span,
+            ));
+        }
         let [arg] = function.expect_exact_arguments()?;
         let pattern = expect_date_pattern(diagnostics, arg, context.current_time())?;
-        Ok(RevsetExpression::filter(
-            RevsetFilterPredicate::CommitterDate(pattern),
-        ))
+        let predicate = RevsetFilterPredicate::CommitterTimestamp(pattern);
+        Ok(RevsetExpression::filter(predicate))
     });
+    // TODO: Remove committer_date() in jj 0.44+
+    map.insert("committer_date", map["committer_timestamp"]);
     map.insert("empty", |_diagnostics, function, _context| {
         function.expect_no_arguments()?;
         Ok(RevsetExpression::is_empty())
