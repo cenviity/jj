@@ -8,15 +8,16 @@ Jujutsu keeps commits on anonymous branches around until they are explicitly
 abandoned. Visible anonymous branches are tracked by the [view](#view), which
 stores a list of [heads](#head) of such branches.
 
-## Author date
+## <a name="author-date"></a>Author timestamp
 
-The author date of a [commit](#commit) records when the commit's changes were
-originally authored. It is set when the commit is first authored and usually
-stays the same when the commit is [rewritten](#rewrite). For a newly-created
-commit, the author date and [committer date](#committer-date) are usually the
-same, but they can differ after history-editing commands such as `jj rebase`,
-`jj describe`, or `jj squash`. When using the Git [backend](#backend), this is
-stored as Git's native author date field.
+The author timestamp of a [commit](#commit) records when the commit's changes
+were originally authored. It is set when the commit is first authored and
+usually stays the same when the commit is [rewritten](#rewrite). For a
+newly-created commit, the author timestamp and [committer
+timestamp](#committer-date) are usually the same, but they can differ after
+history-editing commands such as `jj rebase`, `jj describe`, or `jj squash`.
+When using the Git [backend](#backend), this is stored as Git's native author
+date field.
 
 ## Backend
 
@@ -99,14 +100,14 @@ long when using the Git backend. They are presented in regular hexadecimal
 format at the end of the line in `jj log`, using 12 hexadecimal digits by
 default. When using the Git backend, the commit ID is the Git commit ID.
 
-## Committer date
+## <a name="committer-date"></a>Committer timestamp
 
-The committer date of a [commit](#commit) records when that particular commit
-object was created. It is set for a new commit and updated whenever `jj`
+The committer timestamp of a [commit](#commit) records when that particular
+commit object was created. It is set for a new commit and updated whenever `jj`
 [rewrites](#rewrite) the commit, such as when rebasing, describing, or squashing
-it. For a newly-created commit, the committer date and
-[author date](#author-date) are usually the same, but they can differ after the
-commit has been rewritten. When using the Git [backend](#backend), this is
+it. For a newly-created commit, the committer timestamp and [author
+timestamp](#author-timestamp) are usually the same, but they can differ after
+the commit has been rewritten. When using the Git [backend](#backend), this is
 stored as Git's native committer date field.
 
 ## <a name="colocated-repos"></a>Colocated workspaces
