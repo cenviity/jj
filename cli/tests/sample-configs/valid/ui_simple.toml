@@ -14,7 +14,11 @@ diff-editor = "meld"
 merge-editor = "meld-3"
 conflict-marker-style = "git"
 show-cryptographic-signatures = true
-bookmark-list-sort-keys = ["author-email", "author-date-", "committer-name"]
+bookmark-list-sort-keys = [
+    "author-email",
+    "author-timestamp-",
+    "committer-name",
+]
 # bookmark-list-sort-keys = "author-name"
 
 [ui.streampager]
