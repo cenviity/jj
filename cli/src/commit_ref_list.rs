@@ -132,18 +132,18 @@ pub enum SortKey {
     AuthorEmail,
     #[value(name = "author-email-")]
     AuthorEmailDesc,
-    AuthorDate,
-    #[value(name = "author-date-")]
-    AuthorDateDesc,
+    AuthorTimestamp,
+    #[value(name = "author-timestamp-")]
+    AuthorTimestampDesc,
     CommitterName,
     #[value(name = "committer-name-")]
     CommitterNameDesc,
     CommitterEmail,
     #[value(name = "committer-email-")]
     CommitterEmailDesc,
-    CommitterDate,
-    #[value(name = "committer-date-")]
-    CommitterDateDesc,
+    CommitterTimestamp,
+    #[value(name = "committer-timestamp-")]
+    CommitterTimestampDesc,
 }
 
 impl SortKey {
@@ -154,14 +154,14 @@ impl SortKey {
             | Self::AuthorNameDesc
             | Self::AuthorEmail
             | Self::AuthorEmailDesc
-            | Self::AuthorDate
-            | Self::AuthorDateDesc
+            | Self::AuthorTimestamp
+            | Self::AuthorTimestampDesc
             | Self::CommitterName
             | Self::CommitterNameDesc
             | Self::CommitterEmail
             | Self::CommitterEmailDesc
-            | Self::CommitterDate
-            | Self::CommitterDateDesc => true,
+            | Self::CommitterTimestamp
+            | Self::CommitterTimestampDesc => true,
         }
     }
 }
@@ -257,10 +257,10 @@ fn sort_inner(
                     cmp::Reverse(to_commit(item).map(|commit| commit.author.email.as_str()))
                 });
             }
-            SortKey::AuthorDate => {
+            SortKey::AuthorTimestamp => {
                 items.sort_by_key(|item| to_commit(item).map(|commit| commit.author.timestamp));
             }
-            SortKey::AuthorDateDesc => {
+            SortKey::AuthorTimestampDesc => {
                 items.sort_by_key(|item| {
                     cmp::Reverse(to_commit(item).map(|commit| commit.author.timestamp))
                 });
@@ -285,10 +285,10 @@ fn sort_inner(
                     cmp::Reverse(to_commit(item).map(|commit| commit.committer.email.as_str()))
                 });
             }
-            SortKey::CommitterDate => {
+            SortKey::CommitterTimestamp => {
                 items.sort_by_key(|item| to_commit(item).map(|commit| commit.committer.timestamp));
             }
-            SortKey::CommitterDateDesc => {
+            SortKey::CommitterTimestampDesc => {
                 items.sort_by_key(|item| {
                     cmp::Reverse(to_commit(item).map(|commit| commit.committer.timestamp))
                 });
@@ -387,8 +387,8 @@ mod tests {
             {
                 author.email = String::from(email);
             }
-            if sort_keys.contains(&SortKey::AuthorDate)
-                || sort_keys.contains(&SortKey::AuthorDateDesc)
+            if sort_keys.contains(&SortKey::AuthorTimestamp)
+                || sort_keys.contains(&SortKey::AuthorTimestampDesc)
             {
                 author.timestamp = new_timestamp();
             }
@@ -402,8 +402,8 @@ mod tests {
             {
                 committer.email = String::from(email);
             }
-            if sort_keys.contains(&SortKey::CommitterDate)
-                || sort_keys.contains(&SortKey::CommitterDateDesc)
+            if sort_keys.contains(&SortKey::CommitterTimestamp)
+                || sort_keys.contains(&SortKey::CommitterTimestampDesc)
             {
                 committer.timestamp = new_timestamp();
             }
@@ -494,7 +494,7 @@ mod tests {
                 let author_email = commit
                     .map(|c| c.author.email.clone())
                     .unwrap_or_else(|| String::from("-"));
-                let author_date = commit
+                let author_timestamp = commit
                     .map(|c| c.author.timestamp.timestamp.0.to_string())
                     .unwrap_or_else(|| String::from("-"));
 
@@ -504,7 +504,7 @@ mod tests {
                 let committer_email = commit
                     .map(|c| c.committer.email.clone())
                     .unwrap_or_else(|| String::from("-"));
-                let committer_date = commit
+                let committer_timestamp = commit
                     .map(|c| c.committer.timestamp.timestamp.0.to_string())
                     .unwrap_or_else(|| String::from("-"));
 
@@ -512,10 +512,10 @@ mod tests {
                     name,
                     author_name,
                     author_email,
-                    author_date,
+                    author_timestamp,
                     committer_name,
                     committer_email,
-                    committer_date
+                    committer_timestamp
                 )
             })
             .collect();
@@ -604,9 +604,9 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_by_author_date() {
+    fn test_sort_by_author_timestamp() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::AuthorDate]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::AuthorTimestamp]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         foo@origin          -               -                -             -               -                -
         foo                 Test User       test.user@g.com  1             Test User       test.user@g.com  0
@@ -617,9 +617,9 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_by_author_date_desc() {
+    fn test_sort_by_author_timestamp_desc() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::AuthorDateDesc]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::AuthorTimestampDesc]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         foo@origin          Test User       test.user@g.com  3             Test User       test.user@g.com  0
         foo                 Test User       test.user@g.com  2             Test User       test.user@g.com  0
@@ -682,9 +682,9 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_by_committer_date() {
+    fn test_sort_by_committer_timestamp() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::CommitterDate]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::CommitterTimestamp]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         foo@origin          -               -                -             -               -                -
         foo                 Test User       test.user@g.com  0             Test User       test.user@g.com  1
@@ -695,9 +695,9 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_by_committer_date_desc() {
+    fn test_sort_by_committer_timestamp_desc() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::CommitterDateDesc]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::CommitterTimestampDesc]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         foo@origin          Test User       test.user@g.com  0             Test User       test.user@g.com  3
         foo                 Test User       test.user@g.com  0             Test User       test.user@g.com  2
@@ -708,9 +708,9 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_by_author_date_desc_and_name() {
+    fn test_sort_by_author_timestamp_desc_and_name() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::AuthorDateDesc, SortKey::Name]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::AuthorTimestampDesc, SortKey::Name]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         bug-fix@origin      Test User       test.user@g.com  3             Test User       test.user@g.com  0
         chore               Test User       test.user@g.com  2             Test User       test.user@g.com  0
@@ -736,9 +736,9 @@ mod tests {
     // Bookmarks are already sorted by name
     // Test when sorting by name is not the only/last criteria
     #[test]
-    fn test_sort_by_name_and_author_date() {
+    fn test_sort_by_name_and_author_timestamp() {
         insta::assert_snapshot!(
-            prepare_data_sort_and_snapshot(&[SortKey::Name, SortKey::AuthorDate]), @r"
+            prepare_data_sort_and_snapshot(&[SortKey::Name, SortKey::AuthorTimestamp]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
         bug-fix@origin      Test User       test.user@g.com  3             Test User       test.user@g.com  0
         bug-fix@upstream    Test User       test.user@g.com  1             Test User       test.user@g.com  0

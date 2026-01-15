@@ -953,12 +953,12 @@ fn test_all_modifier() {
     ");
 }
 
-/// Verifies that the committer_date revset honors the local time zone.
+/// Verifies that the committer_timestamp revset honors the local time zone.
 /// This test cannot run on Windows because The TZ env var does not control
 /// chrono::Local on that platform.
 #[test]
 #[cfg(not(target_os = "windows"))]
-fn test_revset_committer_date_with_time_zone() {
+fn test_revset_committer_timestamp_with_time_zone() {
     // Use these for the test instead of tzdb identifiers like America/New_York
     // because the tz database may not be installed on some build servers
     const NEW_YORK: &str = "EST+5EDT+4,M3.1.0,M11.1.0";
@@ -994,7 +994,7 @@ fn test_revset_committer_date_with_time_zone() {
         ])
         .success();
 
-    let mut log_commits_before_and_after = |committer_date: &str, now: &str, tz: &str| {
+    let mut log_commits_before_and_after = |committer_timestamp: &str, now: &str, tz: &str| {
         test_env.add_env_var("TZ", tz);
         let config = format!("debug.commit-timestamp={now}");
         let work_dir = test_env.work_dir("repo");
@@ -1006,7 +1006,7 @@ fn test_revset_committer_date_with_time_zone() {
             "-T",
             "description.first_line() ++ ' ' ++ committer.timestamp() ++ '\n'",
             "-r",
-            format!("committer_date(before:'{committer_date}') ~ root()").as_str(),
+            format!("committer_timestamp(before:'{committer_timestamp}') ~ root()").as_str(),
         ]);
         let after_log = work_dir.run_jj([
             "--config",
@@ -1016,7 +1016,7 @@ fn test_revset_committer_date_with_time_zone() {
             "-T",
             "description.first_line() ++ ' ' ++ committer.timestamp() ++ '\n'",
             "-r",
-            format!("committer_date(after:'{committer_date}')").as_str(),
+            format!("committer_timestamp(after:'{committer_timestamp}')").as_str(),
         ]);
         (before_log, after_log)
     };

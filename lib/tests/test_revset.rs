@@ -3506,7 +3506,7 @@ fn parse_timestamp(s: &str) -> Timestamp {
 }
 
 #[test]
-fn test_evaluate_expression_author_date() {
+fn test_evaluate_expression_author_timestamp() {
     let test_repo = TestRepo::init();
     let repo = &test_repo.repo;
 
@@ -3562,17 +3562,17 @@ fn test_evaluate_expression_author_date() {
 
     // Can find multiple matches
     assert_eq!(
-        resolve_commit_ids(mut_repo, "author_date(after:'2023-03-25 12:00')"),
+        resolve_commit_ids(mut_repo, "author_timestamp(after:'2023-03-25 12:00')"),
         vec![commit3.id().clone(), commit2.id().clone()]
     );
     assert_eq!(
-        resolve_commit_ids(mut_repo, "author_date(before:'2023-03-25 12:00')"),
+        resolve_commit_ids(mut_repo, "author_timestamp(before:'2023-03-25 12:00')"),
         vec![commit1.id().clone(), root_commit.id().clone()]
     );
 }
 
 #[test]
-fn test_evaluate_expression_committer_date() {
+fn test_evaluate_expression_committer_timestamp() {
     let test_repo = TestRepo::init();
     let repo = &test_repo.repo;
 
@@ -3628,11 +3628,11 @@ fn test_evaluate_expression_committer_date() {
 
     // Can find multiple matches
     assert_eq!(
-        resolve_commit_ids(mut_repo, "committer_date(after:'2023-03-25 12:00')"),
+        resolve_commit_ids(mut_repo, "committer_timestamp(after:'2023-03-25 12:00')"),
         vec![commit3.id().clone(), commit2.id().clone()]
     );
     assert_eq!(
-        resolve_commit_ids(mut_repo, "committer_date(before:'2023-03-25 12:00')"),
+        resolve_commit_ids(mut_repo, "committer_timestamp(before:'2023-03-25 12:00')"),
         vec![commit1.id().clone(), root_commit.id().clone()]
     );
 }

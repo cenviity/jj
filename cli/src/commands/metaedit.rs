@@ -216,8 +216,8 @@ pub(crate) fn cmd_metaedit(
                 if args.update_author_timestamp {
                     new_author.timestamp = commit_builder.committer().timestamp;
                 }
-                if let Some(author_date) = args.author_timestamp {
-                    new_author.timestamp = author_date;
+                if let Some(author_timestamp) = args.author_timestamp {
+                    new_author.timestamp = author_timestamp;
                 }
                 // If the old commit had an unset author, the commit builder
                 // may already have the author updated from the current config.

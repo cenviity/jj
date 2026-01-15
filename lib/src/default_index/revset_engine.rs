@@ -1271,13 +1271,13 @@ fn build_predicate_fn(
                 Ok(matcher.is_match(&commit.author().email))
             })
         }
-        RevsetFilterPredicate::AuthorDate(expression) => {
+        RevsetFilterPredicate::AuthorTimestamp(expression) => {
             let expression = *expression;
             box_pure_predicate_fn(move |index, pos| {
                 let entry = index.commits().entry_by_pos(pos);
                 let commit = store.get_commit(&entry.commit_id())?;
-                let author_date = &commit.author().timestamp;
-                Ok(expression.matches(author_date))
+                let author_timestamp = &commit.author().timestamp;
+                Ok(expression.matches(author_timestamp))
             })
         }
         RevsetFilterPredicate::CommitterName(expression) => {
@@ -1296,13 +1296,13 @@ fn build_predicate_fn(
                 Ok(matcher.is_match(&commit.committer().email))
             })
         }
-        RevsetFilterPredicate::CommitterDate(expression) => {
+        RevsetFilterPredicate::CommitterTimestamp(expression) => {
             let expression = *expression;
             box_pure_predicate_fn(move |index, pos| {
                 let entry = index.commits().entry_by_pos(pos);
                 let commit = store.get_commit(&entry.commit_id())?;
-                let committer_date = &commit.committer().timestamp;
-                Ok(expression.matches(committer_date))
+                let committer_timestamp = &commit.committer().timestamp;
+                Ok(expression.matches(committer_timestamp))
             })
         }
         RevsetFilterPredicate::File(expr) => {

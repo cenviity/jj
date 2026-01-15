@@ -190,13 +190,13 @@ pub enum RevsetFilterPredicate {
     /// Commits with author email matching the pattern.
     AuthorEmail(StringExpression),
     /// Commits with author dates matching the given date pattern.
-    AuthorDate(DatePattern),
+    AuthorTimestamp(DatePattern),
     /// Commits with committer name matching the pattern.
     CommitterName(StringExpression),
     /// Commits with committer email matching the pattern.
     CommitterEmail(StringExpression),
     /// Commits with committer dates matching the given date pattern.
-    CommitterDate(DatePattern),
+    CommitterTimestamp(DatePattern),
     /// Commits modifying the paths specified by the fileset.
     File(FilesetExpression),
     /// Commits containing diffs matching the `text` pattern within the `files`.
@@ -1023,12 +1023,12 @@ static BUILTIN_FUNCTION_MAP: LazyLock<HashMap<&str, RevsetFunction>> = LazyLock:
         let predicate = RevsetFilterPredicate::AuthorEmail(expr);
         Ok(RevsetExpression::filter(predicate))
     });
-    map.insert("author_date", |diagnostics, function, context| {
+    map.insert("author_timestamp", |diagnostics, function, context| {
         let [arg] = function.expect_exact_arguments()?;
         let pattern = expect_date_pattern(diagnostics, arg, context.date_pattern_context())?;
-        Ok(RevsetExpression::filter(RevsetFilterPredicate::AuthorDate(
-            pattern,
-        )))
+        Ok(RevsetExpression::filter(
+            RevsetFilterPredicate::AuthorTimestamp(pattern),
+        ))
     });
     map.insert("signed", |_diagnostics, function, _context| {
         function.expect_no_arguments()?;
@@ -1064,11 +1064,11 @@ static BUILTIN_FUNCTION_MAP: LazyLock<HashMap<&str, RevsetFunction>> = LazyLock:
         let predicate = RevsetFilterPredicate::CommitterEmail(expr);
         Ok(RevsetExpression::filter(predicate))
     });
-    map.insert("committer_date", |diagnostics, function, context| {
+    map.insert("committer_timestamp", |diagnostics, function, context| {
         let [arg] = function.expect_exact_arguments()?;
         let pattern = expect_date_pattern(diagnostics, arg, context.date_pattern_context())?;
         Ok(RevsetExpression::filter(
-            RevsetFilterPredicate::CommitterDate(pattern),
+            RevsetFilterPredicate::CommitterTimestamp(pattern),
         ))
     });
     map.insert("empty", |_diagnostics, function, _context| {
