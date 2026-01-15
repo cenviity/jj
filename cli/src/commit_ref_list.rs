@@ -736,7 +736,7 @@ mod tests {
     // Bookmarks are already sorted by name
     // Test when sorting by name is not the only/last criteria
     #[test]
-    fn test_sort_by_name_and_committer_date() {
+    fn test_sort_by_name_and_author_date() {
         insta::assert_snapshot!(
             prepare_data_sort_and_snapshot(&[SortKey::Name, SortKey::AuthorDate]), @r"
         Name                AuthorName      AuthorEmail      AuthorDate    CommitterName   CommitterEmail   CommitterDate
