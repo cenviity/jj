@@ -267,14 +267,14 @@
                             "author-name-",
                             "author-email",
                             "author-email-",
-                            "author-date",
-                            "author-date-",
+                            "author-timestamp",
+                            "author-timestamp-",
                             "committer-name",
                             "committer-name-",
                             "committer-email",
                             "committer-email-",
-                            "committer-date",
-                            "committer-date-"
+                            "committer-timestamp",
+                            "committer-timestamp-"
                         ]
                     }
                 },
@@ -290,14 +290,14 @@
                             "author-name-",
                             "author-email",
                             "author-email-",
-                            "author-date",
-                            "author-date-",
+                            "author-timestamp",
+                            "author-timestamp-",
                             "committer-name",
                             "committer-name-",
                             "committer-email",
                             "committer-email-",
-                            "committer-date",
-                            "committer-date-"
+                            "committer-timestamp",
+                            "committer-timestamp-"
                         ]
                     }
                 }

@@ -153,7 +153,7 @@ fn test_tag_bad_name() {
     For more information, try '--help'.
     Caused by:  --> 1:1
       |
-    1 | 
+    1 |
       | ^---
       |
       = expected <identifier>, <string_literal>, or <raw_string_literal>
@@ -369,7 +369,7 @@ fn test_tag_list() {
     ");
 
     // Sort by command argument
-    insta::assert_snapshot!(work_dir.run_jj(["tag", "list", "--sort=committer-date-,name"]), @"
+    insta::assert_snapshot!(work_dir.run_jj(["tag", "list", "--sort=committer-date-,name"]), @r"
     conflicted_tag (conflicted):
       - rlvkpnrz 893e67dc (empty) commit1
       + zsuskuln 76abdd20 (empty) commit2
@@ -377,10 +377,13 @@ fn test_tag_list() {
     test_tag2: zsuskuln 76abdd20 (empty) commit2
     test_tag: rlvkpnrz 893e67dc (empty) commit1
     [EOF]
+    ------- stderr -------
+    Warning: The sort key `committer-date` is deprecated. Use `committer-timestamp` instead.
+    [EOF]
     ");
 
     // Default sort keys in config
-    let config = "--config=ui.tag-list-sort-keys=['committer-date', 'name-']";
+    let config = "--config=ui.tag-list-sort-keys=['committer-timestamp', 'name-']";
     insta::assert_snapshot!(work_dir.run_jj(["tag", "list", config]), @"
     test_tag: rlvkpnrz 893e67dc (empty) commit1
     test_tag2: zsuskuln 76abdd20 (empty) commit2
