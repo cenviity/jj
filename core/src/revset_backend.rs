@@ -108,14 +108,14 @@ pub enum RevsetFilterPredicate {
     AuthorName(StringExpression),
     /// Commits with author email matching the pattern.
     AuthorEmail(StringExpression),
-    /// Commits with author dates matching the given date pattern.
-    AuthorDate(DatePattern),
+    /// Commits with author timestamps matching the given date pattern.
+    AuthorTimestamp(DatePattern),
     /// Commits with committer name matching the pattern.
     CommitterName(StringExpression),
     /// Commits with committer email matching the pattern.
     CommitterEmail(StringExpression),
-    /// Commits with committer dates matching the given date pattern.
-    CommitterDate(DatePattern),
+    /// Commits with committer timestamps matching the given date pattern.
+    CommitterTimestamp(DatePattern),
     /// Commits modifying the paths specified by the fileset.
     File(FilesetExpression),
     /// Commits containing diffs matching the `text` pattern within the `files`.
