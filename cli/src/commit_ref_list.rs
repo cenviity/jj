@@ -147,7 +147,7 @@ pub enum SortKey {
 }
 
 impl SortKey {
-    fn is_commit_dependant(&self) -> bool {
+    fn is_commit_dependent(&self) -> bool {
         match self {
             Self::Name | Self::NameDesc => false,
             Self::AuthorName
@@ -191,7 +191,7 @@ pub fn sort(
     sort_keys: &[SortKey],
 ) -> BackendResult<()> {
     let mut commits: HashMap<CommitId, Arc<backend::Commit>> = HashMap::new();
-    if sort_keys.iter().any(|key| key.is_commit_dependant()) {
+    if sort_keys.iter().any(|key| key.is_commit_dependent()) {
         commits = items
             .iter()
             .filter_map(|item| item.primary.target().added_ids().next())
