@@ -36,8 +36,9 @@ fn test_annotate_linear() {
     let work_dir = test_env.work_dir("repo");
 
     work_dir.write_file("file.txt", "line1\n");
+    work_dir.run_jj(["describe", "-m=initial"]).success();
     work_dir
-        .run_jj(["describe", "-m=initial", "--author=Foo <foo@example.org>"])
+        .run_jj(["metaedit", "--author=Foo <foo@example.org>"])
         .success();
 
     work_dir.run_jj(["new", "-m=next"]).success();
@@ -48,8 +49,8 @@ fn test_annotate_linear() {
 
     let output = work_dir.run_jj(["file", "annotate", "file.txt"]);
     insta::assert_snapshot!(output, @"
-    qpvuntsm foo      2001-02-03 08:05:08    1: line1
-    kkmpptxz test.use 2001-02-03 08:05:10    2: new text from new commit
+    qpvuntsm foo      2001-02-03 08:05:09    1: line1
+    zsuskuln test.use 2001-02-03 08:05:11    2: new text from new commit
     [EOF]
     ");
 }

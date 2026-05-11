@@ -598,7 +598,7 @@ fn test_config_set_bad_opts() {
     ------- stderr -------
     error: invalid value '' for '<NAME>': TOML parse error at line 1, column 1
       |
-    1 | 
+    1 |
       | ^
     unquoted keys cannot be empty, expected letters, numbers, `-`, `_`
 
@@ -1534,7 +1534,7 @@ fn test_config_path_syntax() {
     ------- stderr -------
     error: invalid value '' for '[NAME]': TOML parse error at line 1, column 1
       |
-    1 | 
+    1 |
       | ^
     unquoted keys cannot be empty, expected letters, numbers, `-`, `_`
 

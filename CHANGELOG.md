@@ -14,6 +14,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Breaking changes
 
+* The deprecated flags `--reset-author` and `--author` of `jj commit` have been
+  removed.
+
+* The deprecated flags `--no-edit`, `--reset-author` and `--author` of `jj
+  describe` have been removed.
+
 ### Deprecations
 
 ### New features

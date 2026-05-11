@@ -205,10 +205,9 @@ backend = "test"
 
     work_dir
         .run_jj(&[
-            "desc",
+            "metaedit",
             "--author",
             "Someone Else <someone@else.com>",
-            "--no-edit",
             "..@-",
         ])
         .success();
