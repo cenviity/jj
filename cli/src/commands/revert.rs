@@ -193,7 +193,7 @@ pub(crate) async fn cmd_revert(
     }
 
     // Rebase new children onto the reverted commit.
-    let new_head_ids: Vec<_> = parent_ids;
+    let new_head_ids = parent_ids;
     let children_commit_ids_set: HashSet<CommitId> = new_child_ids.iter().cloned().collect();
     let mut num_rebased = 0;
     tx.repo_mut()
