@@ -18,6 +18,7 @@ use std::path::PathBuf;
 
 use indoc::formatdoc;
 use indoc::indoc;
+use itertools::Itertools as _;
 use jj_lib::file_util::symlink_file;
 use testutils::TestResult;
 
@@ -1106,13 +1107,11 @@ fn test_deduplication() {
 }
 
 fn sorted_lines(path: PathBuf) -> String {
-    let mut log: Vec<_> = std::fs::read_to_string(path.as_os_str())
+    std::fs::read_to_string(path.as_os_str())
         .unwrap()
         .lines()
-        .map(String::from)
-        .collect();
-    log.sort();
-    log.join("\n")
+        .sorted_unstable()
+        .join("\n")
 }
 
 #[test]
