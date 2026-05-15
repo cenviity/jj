@@ -15,6 +15,7 @@
 use std::sync::Arc;
 
 use futures::TryStreamExt as _;
+use itertools::Itertools as _;
 use jj_cli::cli_util::CliRunner;
 use jj_cli::commit_templater::CommitTemplateBuildFnTable;
 use jj_cli::commit_templater::CommitTemplateLanguageExtension;
@@ -154,14 +155,12 @@ impl CommitTemplateLanguageExtension for HexCounter {
                     string_arg,
                     |_diagnostics, arg| {
                         let string = template_parser::expect_string_literal(arg)?;
-                        let chars: Vec<_> = string.chars().collect();
-                        match chars[..] {
-                            [ch] => Ok(ch),
-                            _ => Err(TemplateParseError::expression(
+                        string.chars().exactly_one().map_err(|_| {
+                            TemplateParseError::expression(
                                 "Expected singular character argument",
                                 arg.span,
-                            )),
-                        }
+                            )
+                        })
                     },
                 )?;
 
