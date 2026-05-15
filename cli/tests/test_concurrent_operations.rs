@@ -275,12 +275,12 @@ fn test_git_head_race_condition() -> TestResult {
     // Extract environment from TestEnvironment to use in spawned processes
     let base_cmd = test_env.new_jj_cmd();
     let jj_bin = base_cmd.get_program().to_owned();
-    let base_env: Vec<_> = base_cmd
+    let base_env = base_cmd
         .get_envs()
         .filter_map(|(k, v)| v.map(|v| (k.to_owned(), v.to_owned())))
         // Filter out timestamp and randomness seed so each command gets different values
         .filter(|(k, _)| k != "JJ_TIMESTAMP" && k != "JJ_OP_TIMESTAMP" && k != "JJ_RANDOMNESS_SEED")
-        .collect();
+        .collect_vec();
 
     let repo_path = work_dir.root();
     let duration = std::time::Duration::from_secs(5);
