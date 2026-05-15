@@ -106,14 +106,14 @@ pub async fn cmd_bookmark_advance(
     let repo = workspace_command.repo().clone();
 
     let matched_bookmarks = {
-        let mut bookmarks: Vec<_> = match &args.names {
+        let mut bookmarks = match &args.names {
             Some(texts) => {
                 let name_expr = parse_union_name_patterns(ui, texts)?;
                 let name_matcher = name_expr.to_matcher();
                 let result = repo
                     .view()
                     .local_bookmarks_matching(&name_matcher)
-                    .collect();
+                    .collect_vec();
                 warn_unmatched_local_bookmarks(ui, repo.view(), &name_expr)?;
                 result
             }
