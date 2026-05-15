@@ -932,7 +932,7 @@ fn modified_files_from_rev_with_jj_cmd(
     let stdout = String::from_utf8_lossy(&output.stdout);
 
     let mut include_renames = false;
-    let mut candidates: Vec<_> = stdout
+    let mut candidates = stdout
         .lines()
         .filter_map(|line| line.split_once(' '))
         .filter_map(|(mode, path)| {
@@ -950,7 +950,7 @@ fn modified_files_from_rev_with_jj_cmd(
             };
             path_completion_candidate_from(current, &normalized_prefix, Path::new(path), Some(mode))
         })
-        .collect();
+        .collect_vec();
 
     if include_renames {
         candidates.sort_unstable_by(|a, b| Path::new(a.get_value()).cmp(Path::new(b.get_value())));
@@ -1519,8 +1519,7 @@ mod tests {
             "-r5",
             "unrelated_arg_at_the_end",
         ];
-        let flags: Vec<_> =
-            parse::parse_flag(candidates, args.iter().map(|a| a.to_string())).collect();
+        let flags = parse::parse_flag(candidates, args.iter().map(|a| a.to_string())).collect_vec();
         let expected = ["1", "2", "3", "4", "5"];
         assert_eq!(flags, expected);
     }
