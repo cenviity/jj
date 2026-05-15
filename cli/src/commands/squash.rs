@@ -20,6 +20,7 @@ use clap_complete::ArgValueCompleter;
 use futures::TryStreamExt as _;
 use futures::future::try_join_all;
 use indoc::formatdoc;
+use itertools::Itertools as _;
 use jj_lib::commit::Commit;
 use jj_lib::commit::CommitIteratorExt as _;
 use jj_lib::matchers::Matcher;
@@ -235,7 +236,7 @@ pub(crate) async fn cmd_squash(
         .await?;
 
     // prepare the tx description before possibly rebasing the source commits
-    let source_ids: Vec<_> = sources.iter().ids().collect();
+    let source_ids = sources.iter().ids().collect_vec();
     let tx_description = if let Some(destination) = &pre_existing_destination {
         format!("squash commits into {}", destination.id().hex())
     } else {

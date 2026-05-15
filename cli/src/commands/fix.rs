@@ -224,7 +224,7 @@ pub(crate) async fn cmd_fix(
         .map(|commit| commit.id().clone())
         .collect_vec();
 
-    let trees: Vec<_> = commits.iter().map(|commit| commit.tree()).collect();
+    let trees = commits.iter().map(|commit| commit.tree()).collect_vec();
 
     let fileset_expression = workspace_command.parse_file_patterns(ui, &args.paths)?;
     let matcher = fileset_expression.to_matcher();
