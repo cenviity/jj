@@ -395,6 +395,7 @@ impl SecureConfig {
 mod tests {
     use std::ffi::OsStr;
 
+    use itertools::Itertools;
     use rand::SeedableRng as _;
     use tempfile::TempDir;
 
@@ -447,7 +448,7 @@ mod tests {
         // load_config should generate the config if it previously didn't exist.
         let loaded = env.config.load_config(&mut env.rng, &env.config_dir)?;
         let path = loaded.config_file.unwrap();
-        let components: Vec<_> = path.components().rev().collect();
+        let components = path.components().rev().collect_vec();
         assert_eq!(
             components[0],
             std::path::Component::Normal(OsStr::new("config.toml"))
