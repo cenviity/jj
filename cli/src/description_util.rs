@@ -280,11 +280,11 @@ where
         );
     }
 
-    let missing: Vec<_> = commit_ids_map
+    let missing = commit_ids_map
         .iter()
         .filter(|(_, commit_id)| !descriptions.contains_key(*commit_id))
         .map(|(commit_id_prefix, _)| commit_id_prefix.clone())
-        .collect();
+        .collect_vec();
 
     Ok(ParsedBulkEditMessage {
         descriptions,
@@ -333,11 +333,11 @@ pub async fn combine_messages_for_editing(
 
     if let Some(template) = parse_trailers_template(ui, tx)? {
         // show the user only trailers that were not in one of the squashed commits
-        let old_trailers: Vec<_> = sources
+        let old_trailers = sources
             .iter()
             .chain(destination)
             .flat_map(|commit| parse_description_trailers(commit.description()))
-            .collect();
+            .collect_vec();
         let commit = commit_builder.write_hidden().await?;
         let trailer_lines = template
             .format_plain_text(&commit)
