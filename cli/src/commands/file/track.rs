@@ -15,6 +15,7 @@
 use std::io;
 use std::io::Write as _;
 
+use itertools::Itertools as _;
 use jj_lib::repo_path::RepoPathUiConverter;
 use jj_lib::working_copy::SnapshotStats;
 use jj_lib::working_copy::UntrackedReason;
@@ -111,10 +112,10 @@ pub fn print_track_snapshot_stats(
         })
         .unzip();
     if let Some(size) = sizes.iter().max() {
-        let large_files_list: Vec<_> = large_files
+        let large_files_list = large_files
             .iter()
             .map(|path| path_converter.format_file_path(path))
-            .collect();
+            .collect_vec();
         print_large_file_hint(ui, *size, Some(&large_files_list))?;
     }
     Ok(())
