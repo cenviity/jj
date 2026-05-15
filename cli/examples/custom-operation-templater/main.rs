@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use itertools::Itertools as _;
 use jj_cli::cli_util::CliRunner;
 use jj_cli::operation_templater::OperationTemplateLanguageBuildFnTable;
 use jj_cli::operation_templater::OperationTemplateLanguageExtension;
@@ -65,14 +66,12 @@ impl OperationTemplateLanguageExtension for HexCounter {
                     string_arg,
                     |_diagnostics, arg| {
                         let string = template_parser::expect_string_literal(arg)?;
-                        let chars: Vec<_> = string.chars().collect();
-                        match chars[..] {
-                            [ch] => Ok(ch),
-                            _ => Err(TemplateParseError::expression(
+                        string.chars().exactly_one().map_err(|_| {
+                            TemplateParseError::expression(
                                 "Expected singular character argument",
                                 arg.span,
-                            )),
-                        }
+                            )
+                        })
                     },
                 )?;
 
