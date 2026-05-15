@@ -444,12 +444,12 @@ async fn move_first_commit(
         )
         .await?;
 
-    let new_parent_ids: Vec<_> = new_parent_ids
+    let new_parent_ids = new_parent_ids
         .iter()
         .map(|commit_id| rewritten_commits.get(commit_id).unwrap_or(commit_id))
         .cloned()
         .collect();
-    let new_child_ids: Vec<_> = new_child_ids
+    let new_child_ids = new_child_ids
         .iter()
         .map(|commit_id| rewritten_commits.get(commit_id).unwrap_or(commit_id))
         .cloned()
